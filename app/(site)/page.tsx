@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
 
@@ -48,29 +49,7 @@ export default function Home() {
         </div>
 
         <div className="grid lg:grid-rows-2">
-          <Link
-            href="/view"
-            className="group relative flex min-h-[300px] flex-col justify-center overflow-hidden border-b border-ink/20 bg-mist px-6 py-12 md:px-10"
-          >
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[#8f9187] [clip-path:polygon(100%_0,100%_100%,0_100%)]"
-            />
-            <span className="relative">
-              <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-                Action_01
-              </span>
-              <span className="mt-3 block font-display text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none text-ink">
-                Drop File
-              </span>
-              <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
-                Choose or drag a file to unpack its contents locally in your browser.
-              </span>
-              <span className="mt-5 block font-mono text-xs uppercase tracking-widest text-ink underline underline-offset-4 group-hover:text-sage-deep">
-                Open the viewer &rarr;
-              </span>
-            </span>
-          </Link>
+          <DropFileCard />
 
           <Link
             href="/#formats"
