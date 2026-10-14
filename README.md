@@ -34,7 +34,7 @@ The app routes files through a central registry in `src/lib/formats.ts`.
 1. The selected file extension is normalized with `getExtension`.
 2. The extension is looked up in `FORMAT_REGISTRY`.
 3. The registry chooses a viewer family: `3d`, `svg`, or `unsupported`.
-4. `ViewerShell` lazy-loads the matching viewer so Three.js is not loaded on informational pages until a 3D file is selected.
+4. `FullscreenViewer` lazy-loads the matching viewer so Three.js is not loaded on informational pages until a 3D file is selected.
 
 3D formats share `components/viewers/ThreeViewer.tsx`. Format-specific parsing happens in `loadModel`, while camera controls, fit, reset, lighting, model inspection, and wireframe mode stay common.
 
@@ -47,7 +47,7 @@ Example: adding `dxf`.
 1. Add `"dxf"` to `siteConfig.supportedFormats`.
 2. Add a `dxf` entry to `FORMAT_REGISTRY` with name, category, viewer type, copy, and features.
 3. If an existing viewer works, point the entry to that viewer type. Otherwise create a new viewer under `components/viewers`.
-4. Update `ViewerShell` to lazy-load the new viewer family.
+4. Update `FullscreenViewer` to lazy-load the new viewer family.
 5. If the new format needs a parser, keep loader logic separate from common viewer controls.
 6. Test valid, malformed, empty, too-large, and unsupported files.
 

@@ -5,20 +5,16 @@ import { MAX_FILE_SIZE_MB } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
 
 type FileDropzoneProps = {
-  preferredExtension?: string;
-  compact?: boolean;
   onFileSelected: (file: File) => void;
 };
 
 const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap((format) => format.accepts).join(",");
 
-export function FileDropzone({ preferredExtension, compact = false, onFileSelected }: FileDropzoneProps) {
+export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const supportedLabel = preferredExtension
-    ? preferredExtension.toUpperCase()
-    : SUPPORTED_FORMATS.map((format) => format.name).join(" · ");
+  const supportedLabel = SUPPORTED_FORMATS.map((format) => format.name).join(" · ");
 
   function handleFiles(files: FileList | null) {
     const file = files?.[0];
@@ -45,7 +41,7 @@ export function FileDropzone({ preferredExtension, compact = false, onFileSelect
 
   return (
     <label
-      className={`dropzone ${compact ? "dropzone-compact" : ""} ${isDragging ? "is-dragging" : ""}`}
+      className={`dropzone ${isDragging ? "is-dragging" : ""}`}
       htmlFor={inputId}
       tabIndex={0}
       onDragOver={(event) => {
@@ -61,11 +57,11 @@ export function FileDropzone({ preferredExtension, compact = false, onFileSelect
         id={inputId}
         className="sr-only"
         type="file"
-        accept={preferredExtension ? `.${preferredExtension.toLowerCase()}` : ACCEPTED_EXTENSIONS}
+        accept={ACCEPTED_EXTENSIONS}
         onChange={handleChange}
       />
       <span className="dropzone-kicker">Drop a file here</span>
-      <span className="dropzone-title">{preferredExtension ? `Choose a ${preferredExtension.toUpperCase()} file` : "Choose a file"}</span>
+      <span className="dropzone-title">Choose a file</span>
       <span className="dropzone-meta">
         {supportedLabel} · up to {MAX_FILE_SIZE_MB} MB
       </span>
