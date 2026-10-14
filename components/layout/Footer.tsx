@@ -10,9 +10,11 @@ export function Footer() {
         <p>Browser-first file viewing for formats that are awkward to open.</p>
       </div>
       <nav aria-label="Footer">
+        <Link href="/view">Viewer</Link>
         <Link href="/#formats">Formats</Link>
-        <Link href="/#privacy">Privacy</Link>
-        <Link href="/#about">About</Link>
+        <Link href="/#how-it-works">How it works</Link>
+        <Link href="/privacy">Privacy</Link>
+        <Link href="/about">About</Link>
         <a href="mailto:feedback@fileunpack.com">Feedback</a>
       </nav>
       <div className="footer-format-row" aria-label="Supported formats">
