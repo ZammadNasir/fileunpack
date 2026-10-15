@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { FormatDefinition, relatedFormats } from "@/src/lib/formats";
+import { siteConfig } from "@/src/config/site";
 
 type FormatPageContentProps = {
   format: FormatDefinition;
@@ -19,14 +20,30 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
               Open {format.name} files right in your browser.
             </h1>
             <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink/80">
-              {format.description} Processed locally whenever possible &mdash; no account, no upload
-              queue, no ceremony.
+              {format.description} Processed locally whenever possible &mdash;
+              no account, no upload queue, no ceremony.
             </p>
           </div>
         </div>
 
-        <div className="grid">
+        <div className="grid lg:grid-rows-2">
           <DropFileCard preferredFormat={format} />
+
+          <a
+            href="#format-guide"
+            className="flex min-h-[300px] flex-col justify-center border-b border-ink/20 bg-white px-6 py-12 hover:bg-mist md:px-10"
+          >
+            <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+              Action_02
+            </span>
+            <span className="mt-3 block font-display text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none text-sage-deep">
+              {format.name} Specs &amp; Limits
+            </span>
+            <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
+              Accepts {format.accepts.join(" and ")} up to {siteConfig.maxFileSizeMB} MB.{" "}
+              {format.limitations ?? `No known limitations for ${format.name} files in this viewer.`}
+            </span>
+          </a>
         </div>
       </section>
 
@@ -34,7 +51,9 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
         aria-labelledby="format-guide"
         className="border-b border-ink/20 px-6 py-16 md:px-10 md:py-20"
       >
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">Guide</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+          Guide
+        </p>
         <h2
           id="format-guide"
           className="mt-4 max-w-xl font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
@@ -53,13 +72,17 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
             <strong className="block font-display text-xl font-black tracking-tight">
               How to open a {format.name} file
             </strong>
-            <p className="mt-2 leading-relaxed text-ink/75">{format.howToOpen}</p>
+            <p className="mt-2 leading-relaxed text-ink/75">
+              {format.howToOpen}
+            </p>
           </article>
           <article className="border-t-2 border-ink pt-4">
             <strong className="block font-display text-xl font-black tracking-tight">
               Can I open {format.name} without installing software?
             </strong>
-            <p className="mt-2 leading-relaxed text-ink/75">{format.withoutSoftware}</p>
+            <p className="mt-2 leading-relaxed text-ink/75">
+              {format.withoutSoftware}
+            </p>
           </article>
           <article className="border-t-2 border-ink pt-4">
             <strong className="block font-display text-xl font-black tracking-tight">
@@ -74,8 +97,13 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
         </div>
       </section>
 
-      <section aria-labelledby="related-formats" className="px-6 py-16 md:px-10 md:py-20">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">Keep going</p>
+      <section
+        aria-labelledby="related-formats"
+        className="px-6 py-16 md:px-10 md:py-20"
+      >
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+          Keep going
+        </p>
         <h2
           id="related-formats"
           className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
