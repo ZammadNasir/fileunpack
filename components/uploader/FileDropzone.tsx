@@ -2,6 +2,7 @@
 
 import { MAX_FILE_SIZE_MB } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import { Upload } from "lucide-react";
 import {
   ChangeEvent,
   DragEvent,
@@ -72,7 +73,10 @@ export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
         onChange={handleChange}
       />
       <span className="dropzone-kicker">Drop a file here</span>
-      <span className="dropzone-title">Choose a file</span>
+      <span className="dropzone-title">
+        <Upload aria-hidden="true" size={18} strokeWidth={1.8} />
+        Choose a file
+      </span>
       <span className="dropzone-meta">
         {supportedLabel} · up to {MAX_FILE_SIZE_MB} MB
       </span>

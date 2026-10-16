@@ -4,7 +4,7 @@ type ViewerToolbarProps = {
 
 export function ViewerToolbar({ children }: ViewerToolbarProps) {
   return (
-    <div className="viewer-toolbar" aria-label="Viewer controls">
+    <div className="viewer-toolbar" role="group" aria-label="Viewer controls">
       {children}
     </div>
   );

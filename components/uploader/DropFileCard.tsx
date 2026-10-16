@@ -8,6 +8,7 @@ import {
   SUPPORTED_FORMATS,
 } from "@/src/lib/formats";
 import { savePendingFile } from "@/src/lib/pendingFile";
+import { AlertCircle, LoaderCircle, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   ChangeEvent,
@@ -91,11 +92,10 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
 
   return (
     <label
-      className={`group relative flex min-h-0 min-w-0 cursor-pointer flex-col justify-center overflow-hidden border-b border-ink/20 bg-mist px-6 py-8 md:px-10 lg:py-12 max-lg:border-r ${
-        isDragging ? "outline-2 -outline-offset-2 outline-ink" : ""
-      }`}
+      className={`drop-card ${isDragging ? "is-dragging" : ""} ${status === "error" ? "has-error" : ""}`}
       htmlFor={inputId}
       tabIndex={0}
+      aria-busy={status === "working"}
       onDragOver={(event) => {
         event.preventDefault();
         setIsDragging(true);
@@ -114,35 +114,36 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
         }
         onChange={handleChange}
       />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[#8f9187] [clip-path:polygon(100%_0,100%_100%,0_100%)]"
-      />
-      <span className="relative">
-        <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-          {preferredFormat ? `${preferredFormat.name}_Picker` : "Action_01"}
+      <span className="drop-card-content">
+        <span className="drop-card-kicker">
+          {preferredFormat ? `${preferredFormat.name} viewer` : "Choose a file"}
         </span>
-        <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-ink">
+        <span className="drop-card-title">
           Drop {preferredFormat ? `${preferredFormat.name} File` : "File"}
         </span>
-        <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
+        <span
+          className="drop-card-description"
+          aria-live="polite"
+          role={status === "error" ? "alert" : undefined}
+        >
           {status === "working"
             ? "Processing locally, opening the viewer..."
             : status === "error"
               ? message
               : idleBody}
         </span>
-        <span
-          className={`mt-5 block font-mono text-xs uppercase tracking-widest underline underline-offset-4 ${
-            status === "error"
-              ? "text-[#9d2d22]"
-              : "text-ink group-hover:text-sage-deep"
-          }`}
-        >
+        <span className="drop-card-cta">
+          {status === "working" ? (
+              <LoaderCircle className="animate-spin" aria-hidden="true" size={18} strokeWidth={1.8} />
+          ) : status === "error" ? (
+              <AlertCircle aria-hidden="true" size={18} strokeWidth={1.8} />
+          ) : (
+              <Upload aria-hidden="true" size={18} strokeWidth={1.8} />
+          )}
           {status === "working"
-            ? "Working..."
-            : status === "error"
-              ? "Try another file"
+              ? "Opening viewer..."
+              : status === "error"
+                ? "Try another file"
               : idleCta}
         </span>
       </span>

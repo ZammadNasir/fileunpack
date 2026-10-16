@@ -10,8 +10,8 @@ type FormatPageContentProps = {
 export function FormatPageContent({ format }: FormatPageContentProps) {
   return (
     <main>
-      <section className="flex h-[calc(100svh-var(--header-h))] min-w-0 flex-col overflow-hidden border-b border-ink/20 lg:grid lg:grid-cols-2">
-        <div className="flex min-h-0 min-w-0 flex-auto flex-col justify-between gap-6 border-b border-ink/20 bg-sage px-6 py-6 md:px-10 md:py-8 lg:border-b-0 lg:border-r">
+      <section className="hero-grid grid min-w-0 grid-cols-1 border-b border-ink/15 lg:grid-cols-2">
+        <div className="hero-copy flex min-w-0 flex-col justify-between gap-12 bg-sage px-6 py-10 md:px-10 md:py-14 lg:px-14">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
             {format.category} viewer
           </p>
@@ -26,15 +26,15 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
           </div>
         </div>
 
-        <div className="grid min-h-0 min-w-0 flex-auto grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
           <DropFileCard preferredFormat={format} />
 
           <a
             href="#format-guide"
-            className="flex min-w-0 flex-col justify-center overflow-hidden border-b border-ink/20 bg-white px-6 py-8 hover:bg-mist md:px-10 lg:py-12"
+            className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist md:px-10 lg:py-12"
           >
             <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-              Action_02
+              Format details
             </span>
             <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
               {format.name} Specs &amp; Limits
@@ -51,7 +51,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
 
       <section
         aria-labelledby="format-guide"
-        className="border-b border-ink/20 px-6 py-16 md:px-10 md:py-20"
+        className="border-b border-ink/10 px-6 py-16 md:px-10 md:py-20 lg:px-14"
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
           Guide
@@ -101,7 +101,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
 
       <section
         aria-labelledby="faqs"
-        className="border-b border-ink/20 px-6 py-16 md:px-10 md:py-20"
+        className="border-b border-ink/10 px-6 py-16 md:px-10 md:py-20 lg:px-14"
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
           FAQ
@@ -128,7 +128,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
       {format.relatedFormats.length > 0 && (
         <section
           aria-labelledby="related-formats"
-          className="px-6 py-16 md:px-10 md:py-20"
+          className="px-6 py-16 md:px-10 md:py-20 lg:px-14"
         >
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
             Keep going

@@ -7,6 +7,7 @@ import { validateFile } from "@/src/lib/files";
 import { FormatDefinition, getFormatFromFile } from "@/src/lib/formats";
 import { readPendingFile, savePendingFile } from "@/src/lib/pendingFile";
 import dynamic from "next/dynamic";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -96,7 +97,7 @@ export function FullscreenViewer() {
           href="/"
           aria-label="Close viewer and return home"
         >
-          &times;
+          <X aria-hidden="true" size={20} strokeWidth={1.8} />
         </Link>
       </div>
     );

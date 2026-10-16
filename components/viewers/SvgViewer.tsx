@@ -3,6 +3,7 @@
 import { ViewerError } from "@/components/viewer/ViewerError";
 import { ViewerLoading } from "@/components/viewer/ViewerLoading";
 import { ViewerToolbar } from "@/components/viewer/ViewerToolbar";
+import { Maximize2, RotateCcw, ZoomIn, ZoomOut } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 type SvgViewerProps = {
@@ -53,7 +54,7 @@ export function SvgViewer({ file }: SvgViewerProps) {
 
   const srcDoc = useMemo(() => {
     if (state.status !== "ready") return "";
-    return `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;display:grid;place-items:center;background:#f8f4ec}svg{max-width:100%;max-height:100%;display:block}</style></head><body>${state.markup}</body></html>`;
+    return `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;display:grid;place-items:center;background:#f7f8f4}svg{max-width:100%;max-height:100%;display:block}</style></head><body>${state.markup}</body></html>`;
   }, [state]);
 
   function reset() {
@@ -99,20 +100,28 @@ export function SvgViewer({ file }: SvgViewerProps) {
       <ViewerToolbar>
         <button
           type="button"
+          className="viewer-control"
+          disabled={scale <= 0.25}
           onClick={() => setScale((value) => Math.max(0.25, value - 0.25))}
         >
+          <ZoomOut aria-hidden="true" size={16} strokeWidth={1.8} />
           Zoom out
         </button>
         <button
           type="button"
+          className="viewer-control"
+          disabled={scale >= 5}
           onClick={() => setScale((value) => Math.min(5, value + 0.25))}
         >
+          <ZoomIn aria-hidden="true" size={16} strokeWidth={1.8} />
           Zoom in
         </button>
-        <button type="button" onClick={fit}>
+        <button type="button" className="viewer-control" onClick={fit}>
+          <Maximize2 aria-hidden="true" size={16} strokeWidth={1.8} />
           Fit
         </button>
-        <button type="button" onClick={reset}>
+        <button type="button" className="viewer-control" onClick={reset}>
+          <RotateCcw aria-hidden="true" size={16} strokeWidth={1.8} />
           Reset
         </button>
       </ViewerToolbar>

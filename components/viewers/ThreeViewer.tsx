@@ -4,6 +4,7 @@ import { ViewerError } from "@/components/viewer/ViewerError";
 import { ViewerLoading } from "@/components/viewer/ViewerLoading";
 import { ViewerToolbar } from "@/components/viewer/ViewerToolbar";
 import type { SupportedExtension } from "@/src/lib/formats";
+import { Maximize2, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -46,7 +47,7 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(host.clientWidth, host.clientHeight);
-    renderer.setClearColor(0xf8f4ec, 1);
+    renderer.setClearColor(0xedf0e9, 1);
     host.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -69,7 +70,7 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
     const keyLight = new THREE.DirectionalLight(0xffffff, 3);
     keyLight.position.set(5, 8, 6);
     scene.add(keyLight);
-    const grid = new THREE.GridHelper(10, 10, 0x9b8b7a, 0xd8cebf);
+    const grid = new THREE.GridHelper(10, 10, 0x91a392, 0xd7dfd4);
     grid.position.y = -0.01;
     scene.add(grid);
 
@@ -150,13 +151,15 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
       {status === "loading" && <ViewerLoading />}
       {status === "error" && <ViewerError message={error} />}
       <ViewerToolbar>
-        <button type="button" onClick={resetCamera}>
+        <button type="button" className="viewer-control" onClick={resetCamera}>
+          <RotateCcw aria-hidden="true" size={16} strokeWidth={1.8} />
           Reset
         </button>
-        <button type="button" onClick={resetCamera}>
+        <button type="button" className="viewer-control" onClick={resetCamera}>
+          <Maximize2 aria-hidden="true" size={16} strokeWidth={1.8} />
           Fit
         </button>
-        <label className="toggle-control">
+        <label className="toggle-control viewer-control">
           <input
             type="checkbox"
             checked={wireframe}
@@ -183,7 +186,7 @@ async function loadModel(file: File, extension: SupportedExtension) {
     const geometry = new STLLoader().parse(buffer);
     geometry.computeVertexNormals();
     const material = new THREE.MeshStandardMaterial({
-      color: 0xbe4f32,
+      color: 0x64836f,
       roughness: 0.6,
       metalness: 0.05,
     });
@@ -196,7 +199,7 @@ async function loadModel(file: File, extension: SupportedExtension) {
     model.traverse((object) => {
       if ((object as THREE.Mesh).isMesh) {
         (object as THREE.Mesh).material = new THREE.MeshStandardMaterial({
-          color: 0xbe4f32,
+          color: 0x64836f,
           roughness: 0.72,
         });
       }

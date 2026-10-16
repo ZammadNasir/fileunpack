@@ -31,9 +31,9 @@ const formatList = SUPPORTED_FORMATS.map((format) => format.name).join(", ");
 export default function Home() {
   return (
     <main>
-      <div className="flex h-[calc(100svh-var(--header-h))] flex-col overflow-hidden">
-        <section className="flex min-h-0 min-w-0 flex-1 flex-col border-b border-ink/20 lg:grid lg:grid-cols-2">
-          <div className="flex min-h-0 min-w-0 flex-auto flex-col justify-between gap-6 border-b border-ink/20 bg-sage px-6 py-6 md:px-10 md:py-8 lg:border-b-0 lg:border-r">
+      <div>
+        <section className="hero-grid grid min-w-0 grid-cols-1 border-b border-ink/15 lg:grid-cols-2">
+          <div className="hero-copy flex min-w-0 flex-col justify-between gap-12 bg-sage px-6 py-10 md:px-10 md:py-14 lg:px-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Browser-first file inspection
             </p>
@@ -49,15 +49,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid min-h-0 min-w-0 flex-auto grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+          <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
             <DropFileCard />
 
             <Link
               href="/#formats"
-              className="flex min-w-0 flex-col justify-center overflow-hidden border-b border-ink/20 bg-white px-6 py-8 hover:bg-mist md:px-10 lg:py-12"
+              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist md:px-10 lg:py-12"
             >
               <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-                Action_02
+                Explore formats
               </span>
               <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
                 Supported Formats
@@ -71,7 +71,7 @@ export default function Home() {
         </section>
 
         <div
-          className="overflow-hidden border-b border-ink/20 bg-ink py-3 text-paper"
+          className="overflow-hidden border-b border-ink/10 bg-ink py-3 text-paper"
           aria-hidden="true"
         >
           <div className="marquee-track">
@@ -102,7 +102,7 @@ export default function Home() {
       <section
         id="formats"
         aria-labelledby="formats-heading"
-        className="border-b border-ink/20 px-6 py-16 md:px-10 md:py-20"
+        className="border-b border-ink/10 px-6 py-16 md:px-10 md:py-20 lg:px-14"
       >
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -152,7 +152,7 @@ export default function Home() {
       <section
         id="how-it-works"
         aria-labelledby="how-heading"
-        className="px-6 py-16 md:px-10 md:py-20"
+        className="px-6 py-16 md:px-10 md:py-20 lg:px-14"
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
           How it works
