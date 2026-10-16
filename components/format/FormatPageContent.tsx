@@ -123,51 +123,53 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
         </div>
       </section>
 
-      <section
-        aria-labelledby="related-formats"
-        className="px-6 py-16 md:px-10 md:py-20"
-      >
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-          Keep going
-        </p>
-        <h2
-          id="related-formats"
-          className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
+      {format.relatedFormats.length > 0 && (
+        <section
+          aria-labelledby="related-formats"
+          className="px-6 py-16 md:px-10 md:py-20"
         >
-          Related formats
-        </h2>
-        <ul className="mt-8 max-w-3xl list-none p-0">
-          {format.relatedFormats.map((relatedExtension) => {
-            const related = getFormatByExtension(relatedExtension);
-            if (!related) return null;
-            return (
-              <li key={related.extension}>
-                <Link
-                  href={`/open/${related.extension}`}
-                  className="block border-b border-ink/20 py-6 transition-colors hover:bg-sage"
-                >
-                  <div className="flex items-baseline justify-between">
-                    <span className="font-display text-2xl font-bold tracking-tight">
-                      {related.name}
-                    </span>
-                    <span className="font-mono text-xs font-normal tracking-widest text-ink/60">
-                      .{related.extension}
-                    </span>
-                  </div>
-                  <div className="mt-3 space-y-2">
-                    {related.faqs.slice(0, 2).map((faq, faqIndex) => (
-                      <div key={faqIndex} className="text-sm leading-relaxed text-ink/70">
-                        <span className="font-semibold text-ink/90">Q: {faq.question}</span>
-                        <span className="ml-2">{faq.answer}</span>
-                      </div>
-                    ))}
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+            Keep going
+          </p>
+          <h2
+            id="related-formats"
+            className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
+          >
+            Related formats
+          </h2>
+          <ul className="mt-8 max-w-3xl list-none p-0">
+            {format.relatedFormats.map((relatedExtension) => {
+              const related = getFormatByExtension(relatedExtension);
+              if (!related) return null;
+              return (
+                <li key={related.extension}>
+                  <Link
+                    href={`/open/${related.extension}`}
+                    className="block border-b border-ink/20 py-6 transition-colors hover:bg-sage"
+                  >
+                    <div className="flex items-baseline justify-between">
+                      <span className="font-display text-2xl font-bold tracking-tight">
+                        {related.name}
+                      </span>
+                      <span className="font-mono text-xs font-normal tracking-widest text-ink/60">
+                        .{related.extension}
+                      </span>
+                    </div>
+                    <div className="mt-3 space-y-2">
+                      {related.faqs.slice(0, 2).map((faq, faqIndex) => (
+                        <div key={faqIndex} className="text-sm leading-relaxed text-ink/70">
+                          <span className="font-semibold text-ink/90">Q: {faq.question}</span>
+                          <span className="ml-2">{faq.answer}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }

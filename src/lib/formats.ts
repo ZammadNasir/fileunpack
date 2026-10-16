@@ -229,3 +229,83 @@ export function getFormatFromFile(file: File) {
 export function isSupportedExtension(value: string): value is SupportedExtension {
   return value in FORMAT_REGISTRY;
 }
+
+// Runtime validation to ensure FORMAT_REGISTRY matches siteConfig.supportedFormats
+// This will throw an error at build time if there's a mismatch
+if (typeof window === "undefined") {
+  const registryExtensions = Object.keys(FORMAT_REGISTRY).sort();
+  const configExtensions = [...siteConfig.supportedFormats].sort();
+
+  if (JSON.stringify(registryExtensions) !== JSON.stringify(configExtensions)) {
+    throw new Error(
+      `FORMAT_REGISTRY mismatch with siteConfig.supportedFormats.\n` +
+        `Registry has: ${registryExtensions.join(", ")}\n` +
+        `Config has: ${configExtensions.join(", ")}\n` +
+        `Both must have the same formats in the same order.`
+    );
+  }
+
+  // Validate that all relatedFormats reference valid formats
+  for (const [ext, format] of Object.entries(FORMAT_REGISTRY)) {
+    for (const relatedExt of format.relatedFormats) {
+      if (!(relatedExt in FORMAT_REGISTRY)) {
+        throw new Error(
+          `Invalid related format "${relatedExt}" in ${ext}. It must be a supported format.`
+        );
+      }
+      if (relatedExt === ext) {
+        throw new Error(
+          `Format ${ext} cannot reference itself in relatedFormats.`
+        );
+      }
+    }
+
+    // Check for duplicates in relatedFormats
+    const uniqueRelated = new Set(format.relatedFormats);
+    if (uniqueRelated.size !== format.relatedFormats.length) {
+      throw new Error(
+        `Duplicate entries found in relatedFormats for ${ext}. All entries must be unique.`
+      );
+    }
+
+    // Validate required fields
+    if (!format.name || format.name.trim() === "") {
+      throw new Error(`Format ${ext} must have a non-empty name.`);
+    }
+    if (!format.description || format.description.trim() === "") {
+      throw new Error(`Format ${ext} must have a non-empty description.`);
+    }
+    if (!format.whatIs || format.whatIs.trim() === "") {
+      throw new Error(`Format ${ext} must have a non-empty whatIs field.`);
+    }
+    if (!format.howToOpen || format.howToOpen.trim() === "") {
+      throw new Error(`Format ${ext} must have a non-empty howToOpen field.`);
+    }
+    if (!format.withoutSoftware || format.withoutSoftware.trim() === "") {
+      throw new Error(`Format ${ext} must have a non-empty withoutSoftware field.`);
+    }
+    if (!Array.isArray(format.features) || format.features.length === 0) {
+      throw new Error(`Format ${ext} must have a non-empty features array.`);
+    }
+    if (!Array.isArray(format.accepts) || format.accepts.length === 0) {
+      throw new Error(`Format ${ext} must have a non-empty accepts array.`);
+    }
+    if (!Array.isArray(format.faqs) || format.faqs.length === 0) {
+      throw new Error(`Format ${ext} must have a non-empty faqs array.`);
+    }
+    if (!Array.isArray(format.relatedFormats)) {
+      throw new Error(`Format ${ext} must have a relatedFormats array.`);
+    }
+
+    // Validate FAQ structure
+    for (let i = 0; i < format.faqs.length; i++) {
+      const faq = format.faqs[i];
+      if (!faq.question || faq.question.trim() === "") {
+        throw new Error(`Format ${ext} FAQ ${i} must have a non-empty question.`);
+      }
+      if (!faq.answer || faq.answer.trim() === "") {
+        throw new Error(`Format ${ext} FAQ ${i} must have a non-empty answer.`);
+      }
+    }
+  }
+}
