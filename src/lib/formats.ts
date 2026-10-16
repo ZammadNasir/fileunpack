@@ -2,7 +2,17 @@ import { siteConfig } from "@/src/config/site";
 
 export type SupportedExtension = (typeof siteConfig.supportedFormats)[number];
 export type ViewerType = "3d" | "svg" | "unsupported";
-export type FormatCategory = "3D" | "Vector";
+export type FormatCategory =
+  | "3D"
+  | "CAD"
+  | "Image"
+  | "Document"
+  | "Spreadsheet"
+  | "Data"
+  | "Audio"
+  | "Video"
+  | "Archive"
+  | "Code";
 
 export type FormatDefinition = {
   extension: SupportedExtension;
@@ -173,7 +183,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
   svg: {
     extension: "svg",
     name: "SVG",
-    category: "Vector",
+    category: "Image",
     viewer: "svg",
     supported: true,
     description:
@@ -230,6 +240,11 @@ export function isSupportedExtension(value: string): value is SupportedExtension
   return value in FORMAT_REGISTRY;
 }
 
+export function getCategories(): FormatCategory[] {
+  const categories = new Set(SUPPORTED_FORMATS.map((format) => format.category));
+  return Array.from(categories);
+}
+
 // Runtime validation to ensure FORMAT_REGISTRY matches siteConfig.supportedFormats
 // This will throw an error at build time if there's a mismatch
 if (typeof window === "undefined") {
@@ -243,6 +258,16 @@ if (typeof window === "undefined") {
         `Config has: ${configExtensions.join(", ")}\n` +
         `Both must have the same formats in the same order.`
     );
+  }
+
+  // Validate category values
+  const validCategories: FormatCategory[] = ["3D", "CAD", "Image", "Document", "Spreadsheet", "Data", "Audio", "Video", "Archive", "Code"];
+  for (const [ext, format] of Object.entries(FORMAT_REGISTRY)) {
+    if (!validCategories.includes(format.category)) {
+      throw new Error(
+        `Invalid category "${format.category}" for format ${ext}. Must be one of: ${validCategories.join(", ")}`
+      );
+    }
   }
 
   // Validate that all relatedFormats reference valid formats

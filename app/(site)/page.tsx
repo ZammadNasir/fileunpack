@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { siteConfig } from "@/src/config/site";
-import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import { SUPPORTED_FORMATS, getCategories } from "@/src/lib/formats";
 
 const STEPS = [
   {
@@ -115,7 +115,7 @@ export default function Home() {
         </div>
 
         <div className="mt-12 grid gap-x-14 gap-y-10 md:grid-cols-2">
-          {["3D", "Vector"].map((category) => (
+          {getCategories().map((category) => (
             <div key={category}>
               <p className="border-b-2 border-ink pb-2 font-mono text-[11px] uppercase tracking-[0.2em]">
                 {category}
