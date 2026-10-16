@@ -39,7 +39,7 @@ export default function Home() {
               Browser-first file inspection
             </p>
             <div>
-              <h1 className="max-w-none font-display text-[clamp(3rem,7.2vw,6.4rem)] font-black leading-[0.88] tracking-[-0.03em] text-ink">
+              <h1 className="max-w-none font-display text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.88] tracking-[-0.03em] text-ink">
                 Open unfamiliar files right in your browser.
               </h1>
               <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink/80">
@@ -60,7 +60,7 @@ export default function Home() {
               <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
                 Action_02
               </span>
-              <span className="mt-3 block font-display text-[clamp(1.5rem,4vw,3.4rem)] font-black leading-none text-sage-deep">
+              <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
                 Supported Formats
               </span>
               <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
@@ -104,7 +104,7 @@ export default function Home() {
             </p>
             <h2
               id="formats-heading"
-              className="mt-4 max-w-xl font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
+              className="mt-4 max-w-xl font-display text-[clamp(1.75rem,3.5vw,2.8rem)] font-black leading-[0.95] tracking-[-0.02em]"
             >
               A focused first set of file viewers.
             </h2>
@@ -152,7 +152,7 @@ export default function Home() {
         </p>
         <h2
           id="how-heading"
-          className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
+          className="mt-4 font-display text-[clamp(1.75rem,3.5vw,2.8rem)] font-black leading-[0.95] tracking-[-0.02em]"
         >
           Choose, identify, view.
         </h2>

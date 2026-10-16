@@ -44,8 +44,9 @@ export default function PrivacyPage() {
         <p className="eyebrow">Privacy</p>
         <h1>Your files are yours.</h1>
         <p>
-          {siteConfig.name} is built browser-first: supported files are processed directly in your
-          browser whenever possible, so there is no reason to keep them on a server.
+          {siteConfig.name} is built browser-first: supported files are
+          processed directly in your browser whenever possible, so there is no
+          reason to keep them on a server.
         </p>
       </section>
 
@@ -60,7 +61,7 @@ export default function PrivacyPage() {
 
       <p className="local-note mb-6 mt-10">
         Questions about data handling? Reach us at{" "}
-        <a href="mailto:feedback@fileunpack.com">feedback@fileunpack.com</a>.
+        <a href="mailto:feedback@fileunpack.com">zammadnasir@gmail.com</a>.
       </p>
     </main>
   );

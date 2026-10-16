@@ -107,7 +107,7 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
         <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
           {preferredFormat ? `${preferredFormat.name}_Picker` : "Action_01"}
         </span>
-        <span className="mt-3 block font-display text-[clamp(1.5rem,4vw,3.4rem)] font-black leading-none text-ink">
+        <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-ink">
           Drop {preferredFormat ? `${preferredFormat.name} File` : "File"}
         </span>
         <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
