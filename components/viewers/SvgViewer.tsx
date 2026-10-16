@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import { ViewerError } from "@/components/viewer/ViewerError";
 import { ViewerLoading } from "@/components/viewer/ViewerLoading";
 import { ViewerToolbar } from "@/components/viewer/ViewerToolbar";
+import { useEffect, useMemo, useState } from "react";
 
 type SvgViewerProps = {
   file: File;
@@ -28,12 +28,18 @@ export function SvgViewer({ file }: SvgViewerProps) {
         setState({ status: "loading" });
         const raw = await file.text();
         const parsed = sanitizeSvg(raw);
-        if (!cancelled) setState({ status: "ready", markup: parsed.markup, dimensions: parsed.dimensions });
+        if (!cancelled)
+          setState({
+            status: "ready",
+            markup: parsed.markup,
+            dimensions: parsed.dimensions,
+          });
       } catch {
         if (!cancelled) {
           setState({
             status: "error",
-            message: "The file may be malformed SVG or may contain markup that cannot be safely displayed.",
+            message:
+              "The file may be malformed SVG or may contain markup that cannot be safely displayed.",
           });
         }
       }
@@ -69,7 +75,10 @@ export function SvgViewer({ file }: SvgViewerProps) {
         }}
         onPointerMove={(event) => {
           if (!isPanning) return;
-          setOffset((current) => ({ x: current.x + event.movementX, y: current.y + event.movementY }));
+          setOffset((current) => ({
+            x: current.x + event.movementX,
+            y: current.y + event.movementY,
+          }));
         }}
         onPointerUp={() => setIsPanning(false)}
         onPointerCancel={() => setIsPanning(false)}
@@ -79,19 +88,39 @@ export function SvgViewer({ file }: SvgViewerProps) {
             title="SVG preview"
             sandbox=""
             srcDoc={srcDoc}
-            style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})` }}
+            style={{
+              transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
+            }}
           />
         )}
       </div>
       {state.status === "loading" && <ViewerLoading />}
       {state.status === "error" && <ViewerError message={state.message} />}
       <ViewerToolbar>
-        <button type="button" onClick={() => setScale((value) => Math.max(0.25, value - 0.25))}>Zoom out</button>
-        <button type="button" onClick={() => setScale((value) => Math.min(5, value + 0.25))}>Zoom in</button>
-        <button type="button" onClick={fit}>Fit</button>
-        <button type="button" onClick={reset}>Reset</button>
+        <button
+          type="button"
+          onClick={() => setScale((value) => Math.max(0.25, value - 0.25))}
+        >
+          Zoom out
+        </button>
+        <button
+          type="button"
+          onClick={() => setScale((value) => Math.min(5, value + 0.25))}
+        >
+          Zoom in
+        </button>
+        <button type="button" onClick={fit}>
+          Fit
+        </button>
+        <button type="button" onClick={reset}>
+          Reset
+        </button>
       </ViewerToolbar>
-      {state.status === "ready" && <p className="viewer-note">Dimensions: {state.dimensions} · Drag to pan</p>}
+      {state.status === "ready" && (
+        <p className="viewer-note">
+          Dimensions: {state.dimensions} · Drag to pan
+        </p>
+      )}
     </div>
   );
 }
@@ -104,7 +133,16 @@ function sanitizeSvg(raw: string) {
   const svg = doc.documentElement;
   if (svg.tagName.toLowerCase() !== "svg") throw new Error("Not an SVG");
 
-  const blockedTags = new Set(["script", "foreignobject", "iframe", "object", "embed", "audio", "video", "canvas"]);
+  const blockedTags = new Set([
+    "script",
+    "foreignobject",
+    "iframe",
+    "object",
+    "embed",
+    "audio",
+    "video",
+    "canvas",
+  ]);
   const walker = doc.createTreeWalker(svg, NodeFilter.SHOW_ELEMENT);
   const toRemove: Element[] = [];
 
@@ -118,10 +156,17 @@ function sanitizeSvg(raw: string) {
     for (const attribute of Array.from(element.attributes)) {
       const name = attribute.name.toLowerCase();
       const value = attribute.value.trim().toLowerCase();
-      if (name.startsWith("on") || value.startsWith("javascript:") || value.includes("url(javascript:")) {
+      if (
+        name.startsWith("on") ||
+        value.startsWith("javascript:") ||
+        value.includes("url(javascript:")
+      ) {
         element.removeAttribute(attribute.name);
       }
-      if ((name === "href" || name.endsWith(":href")) && value.startsWith("data:text/html")) {
+      if (
+        (name === "href" || name.endsWith(":href")) &&
+        value.startsWith("data:text/html")
+      ) {
         element.removeAttribute(attribute.name);
       }
     }
@@ -132,7 +177,12 @@ function sanitizeSvg(raw: string) {
   const width = svg.getAttribute("width");
   const height = svg.getAttribute("height");
   const viewBox = svg.getAttribute("viewBox");
-  const dimensions = width && height ? `${width} × ${height}` : viewBox ? `viewBox ${viewBox}` : "not declared";
+  const dimensions =
+    width && height
+      ? `${width} × ${height}`
+      : viewBox
+        ? `viewBox ${viewBox}`
+        : "not declared";
 
   return {
     markup: new XMLSerializer().serializeToString(svg),

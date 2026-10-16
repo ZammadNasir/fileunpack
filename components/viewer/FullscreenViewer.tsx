@@ -1,24 +1,31 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { FileDropzone } from "@/components/uploader/FileDropzone";
-import { ViewerLoading } from "@/components/viewer/ViewerLoading";
 import { UnsupportedFile } from "@/components/viewer/UnsupportedFile";
+import { ViewerLoading } from "@/components/viewer/ViewerLoading";
 import { validateFile } from "@/src/lib/files";
 import { FormatDefinition, getFormatFromFile } from "@/src/lib/formats";
 import { readPendingFile, savePendingFile } from "@/src/lib/pendingFile";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const ThreeViewer = dynamic(() => import("@/components/viewers/ThreeViewer").then((mod) => mod.ThreeViewer), {
-  ssr: false,
-  loading: () => <ViewerLoading />,
-});
+const ThreeViewer = dynamic(
+  () =>
+    import("@/components/viewers/ThreeViewer").then((mod) => mod.ThreeViewer),
+  {
+    ssr: false,
+    loading: () => <ViewerLoading />,
+  },
+);
 
-const SvgViewer = dynamic(() => import("@/components/viewers/SvgViewer").then((mod) => mod.SvgViewer), {
-  ssr: false,
-  loading: () => <ViewerLoading />,
-});
+const SvgViewer = dynamic(
+  () => import("@/components/viewers/SvgViewer").then((mod) => mod.SvgViewer),
+  {
+    ssr: false,
+    loading: () => <ViewerLoading />,
+  },
+);
 
 type Selection =
   | { kind: "loading" }
@@ -29,14 +36,20 @@ type Selection =
 function selectionFromFile(file: File): Selection {
   const validation = validateFile(file);
   if (!validation.ok) {
-    return { kind: "unsupported", extension: validation.extension, message: validation.message };
+    return {
+      kind: "unsupported",
+      extension: validation.extension,
+      message: validation.message,
+    };
   }
 
   const format = getFormatFromFile(file);
   if (!format) {
     return {
       kind: "unsupported",
-      extension: file.name.includes(".") ? file.name.split(".").pop() : undefined,
+      extension: file.name.includes(".")
+        ? file.name.split(".").pop()
+        : undefined,
       message: "This file type is not supported yet.",
     };
   }
@@ -70,12 +83,19 @@ export function FullscreenViewer() {
       <div className="fullscreen-viewer">
         <div className="fullscreen-stage">
           {selection.format.viewer === "3d" ? (
-            <ThreeViewer file={selection.file} extension={selection.format.extension} />
+            <ThreeViewer
+              file={selection.file}
+              extension={selection.format.extension}
+            />
           ) : (
             <SvgViewer file={selection.file} />
           )}
         </div>
-        <Link className="fullscreen-close" href="/" aria-label="Close viewer and return home">
+        <Link
+          className="fullscreen-close"
+          href="/"
+          aria-label="Close viewer and return home"
+        >
           &times;
         </Link>
       </div>
@@ -85,15 +105,18 @@ export function FullscreenViewer() {
   return (
     <div className="fullscreen-panel">
       {selection.kind === "unsupported" && (
-        <UnsupportedFile extension={selection.extension} message={selection.message} />
+        <UnsupportedFile
+          extension={selection.extension}
+          message={selection.message}
+        />
       )}
       {selection.kind === "loading" ? (
         <ViewerLoading />
       ) : (
         <>
           <p className="viewer-intro">
-            Drop a supported file to view it full screen. Nothing is uploaded unless a format genuinely
-            requires it.
+            Drop a supported file to view it full screen. Nothing is uploaded
+            unless a format genuinely requires it.
           </p>
           <FileDropzone onFileSelected={handleFileSelected} />
         </>

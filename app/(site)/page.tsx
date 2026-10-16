@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS, getCategories } from "@/src/lib/formats";
+import Link from "next/link";
 
 const STEPS = [
   {
@@ -31,7 +31,7 @@ const formatList = SUPPORTED_FORMATS.map((format) => format.name).join(", ");
 export default function Home() {
   return (
     <main>
-      <div className="flex h-[calc(100svh_-_var(--header-h))] flex-col overflow-hidden">
+      <div className="flex h-[calc(100svh-var(--header-h))] flex-col overflow-hidden">
         <section className="flex min-h-0 min-w-0 flex-1 flex-col border-b border-ink/20 lg:grid lg:grid-cols-2">
           <div className="flex min-h-0 min-w-0 flex-auto flex-col justify-between gap-6 border-b border-ink/20 bg-sage px-6 py-6 md:px-10 md:py-8 lg:border-b-0 lg:border-r">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
@@ -42,9 +42,9 @@ export default function Home() {
                 Open unfamiliar files right in your browser.
               </h1>
               <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink/80">
-                View uncommon files without installing specialized software. Start
-                with {formatList}. Processed locally whenever possible &mdash; no
-                account, no upload queue, no ceremony.
+                View uncommon files without installing specialized software.
+                Start with {formatList}. Processed locally whenever possible
+                &mdash; no account, no upload queue, no ceremony.
               </p>
             </div>
           </div>

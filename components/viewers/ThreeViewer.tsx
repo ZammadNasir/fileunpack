@@ -1,15 +1,15 @@
 "use client";
 
+import { ViewerError } from "@/components/viewer/ViewerError";
+import { ViewerLoading } from "@/components/viewer/ViewerLoading";
+import { ViewerToolbar } from "@/components/viewer/ViewerToolbar";
+import type { SupportedExtension } from "@/src/lib/formats";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
-import { ViewerError } from "@/components/viewer/ViewerError";
-import { ViewerLoading } from "@/components/viewer/ViewerLoading";
-import { ViewerToolbar } from "@/components/viewer/ViewerToolbar";
-import type { SupportedExtension } from "@/src/lib/formats";
 
 type ThreeViewerProps = {
   file: File;
@@ -27,10 +27,15 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const modelRef = useRef<THREE.Object3D | null>(null);
-  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [status, setStatus] = useState<"loading" | "ready" | "error">(
+    "loading",
+  );
   const [error, setError] = useState("");
   const [wireframe, setWireframe] = useState(false);
-  const [modelInfo, setModelInfo] = useState<ModelInfo>({ objects: 0, triangles: 0 });
+  const [modelInfo, setModelInfo] = useState<ModelInfo>({
+    objects: 0,
+    triangles: 0,
+  });
 
   useEffect(() => {
     const host = hostRef.current;
@@ -47,7 +52,12 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(45, host.clientWidth / host.clientHeight, 0.01, 100000);
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      host.clientWidth / host.clientHeight,
+      0.01,
+      100000,
+    );
     camera.position.set(4, 3, 5);
     cameraRef.current = camera;
 
@@ -85,7 +95,9 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
         setStatus("ready");
       } catch {
         if (!disposed) {
-          setError("The file may be corrupted, incomplete, or use an unsupported variant.");
+          setError(
+            "The file may be corrupted, incomplete, or use an unsupported variant.",
+          );
           setStatus("error");
         }
       }
@@ -130,20 +142,34 @@ export function ThreeViewer({ file, extension }: ThreeViewerProps) {
 
   return (
     <div className="viewer-block">
-      <div className="canvas-frame" ref={hostRef} aria-label="3D model preview" />
+      <div
+        className="canvas-frame"
+        ref={hostRef}
+        aria-label="3D model preview"
+      />
       {status === "loading" && <ViewerLoading />}
       {status === "error" && <ViewerError message={error} />}
       <ViewerToolbar>
-        <button type="button" onClick={resetCamera}>Reset</button>
-        <button type="button" onClick={resetCamera}>Fit</button>
+        <button type="button" onClick={resetCamera}>
+          Reset
+        </button>
+        <button type="button" onClick={resetCamera}>
+          Fit
+        </button>
         <label className="toggle-control">
-          <input type="checkbox" checked={wireframe} onChange={(event) => setWireframe(event.currentTarget.checked)} />
+          <input
+            type="checkbox"
+            checked={wireframe}
+            onChange={(event) => setWireframe(event.currentTarget.checked)}
+          />
           Wireframe
         </label>
       </ViewerToolbar>
       {status === "ready" && (
         <p className="viewer-note">
-          {modelInfo.objects} object{modelInfo.objects === 1 ? "" : "s"} · about {modelInfo.triangles.toLocaleString()} triangle{modelInfo.triangles === 1 ? "" : "s"}
+          {modelInfo.objects} object{modelInfo.objects === 1 ? "" : "s"} · about{" "}
+          {modelInfo.triangles.toLocaleString()} triangle
+          {modelInfo.triangles === 1 ? "" : "s"}
         </p>
       )}
     </div>
@@ -156,7 +182,11 @@ async function loadModel(file: File, extension: SupportedExtension) {
   if (extension === "stl") {
     const geometry = new STLLoader().parse(buffer);
     geometry.computeVertexNormals();
-    const material = new THREE.MeshStandardMaterial({ color: 0xbe4f32, roughness: 0.6, metalness: 0.05 });
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xbe4f32,
+      roughness: 0.6,
+      metalness: 0.05,
+    });
     return new THREE.Mesh(geometry, material);
   }
 
@@ -165,7 +195,10 @@ async function loadModel(file: File, extension: SupportedExtension) {
     const model = new OBJLoader().parse(text);
     model.traverse((object) => {
       if ((object as THREE.Mesh).isMesh) {
-        (object as THREE.Mesh).material = new THREE.MeshStandardMaterial({ color: 0xbe4f32, roughness: 0.72 });
+        (object as THREE.Mesh).material = new THREE.MeshStandardMaterial({
+          color: 0xbe4f32,
+          roughness: 0.72,
+        });
       }
     });
     return model;
@@ -185,7 +218,11 @@ async function loadModel(file: File, extension: SupportedExtension) {
   throw new Error("Unsupported 3D format");
 }
 
-function fitCameraToObject(object: THREE.Object3D, camera: THREE.PerspectiveCamera, controls: OrbitControls) {
+function fitCameraToObject(
+  object: THREE.Object3D,
+  camera: THREE.PerspectiveCamera,
+  controls: OrbitControls,
+) {
   const box = new THREE.Box3().setFromObject(object);
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());

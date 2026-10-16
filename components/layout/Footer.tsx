@@ -1,12 +1,14 @@
-import Link from "next/link";
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import Link from "next/link";
 
 export function Footer() {
   return (
     <footer className="site-footer">
       <div>
-        <Link className="footer-brand" href="/">{siteConfig.name}</Link>
+        <Link className="footer-brand" href="/">
+          {siteConfig.name}
+        </Link>
         <p>Browser-first file viewing for formats that are awkward to open.</p>
       </div>
       <nav aria-label="Footer">

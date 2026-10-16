@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { FormatPageContent } from "@/components/format/FormatPageContent";
 import { siteConfig } from "@/src/config/site";
-import { FORMAT_REGISTRY, isSupportedExtension, SUPPORTED_FORMATS } from "@/src/lib/formats";
+import {
+  FORMAT_REGISTRY,
+  isSupportedExtension,
+  SUPPORTED_FORMATS,
+} from "@/src/lib/formats";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = PageProps<"/open/[format]">;
 

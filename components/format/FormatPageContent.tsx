@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { DropFileCard } from "@/components/uploader/DropFileCard";
-import { FormatDefinition, getFormatByExtension } from "@/src/lib/formats";
 import { siteConfig } from "@/src/config/site";
+import { FormatDefinition, getFormatByExtension } from "@/src/lib/formats";
+import Link from "next/link";
 
 type FormatPageContentProps = {
   format: FormatDefinition;
@@ -10,7 +10,7 @@ type FormatPageContentProps = {
 export function FormatPageContent({ format }: FormatPageContentProps) {
   return (
     <main>
-      <section className="flex h-[calc(100svh_-_var(--header-h))] min-w-0 flex-col overflow-hidden border-b border-ink/20 lg:grid lg:grid-cols-2">
+      <section className="flex h-[calc(100svh-var(--header-h))] min-w-0 flex-col overflow-hidden border-b border-ink/20 lg:grid lg:grid-cols-2">
         <div className="flex min-h-0 min-w-0 flex-auto flex-col justify-between gap-6 border-b border-ink/20 bg-sage px-6 py-6 md:px-10 md:py-8 lg:border-b-0 lg:border-r">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
             {format.category} viewer
@@ -40,8 +40,10 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
               {format.name} Specs &amp; Limits
             </span>
             <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
-              Accepts {format.accepts.join(" and ")} up to {siteConfig.maxFileSizeMB} MB.{" "}
-              {format.limitations ?? `No known limitations for ${format.name} files in this viewer.`}
+              Accepts {format.accepts.join(" and ")} up to{" "}
+              {siteConfig.maxFileSizeMB} MB.{" "}
+              {format.limitations ??
+                `No known limitations for ${format.name} files in this viewer.`}
             </span>
           </a>
         </div>
@@ -157,8 +159,13 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
                     </div>
                     <div className="mt-3 space-y-2">
                       {related.faqs.slice(0, 2).map((faq, faqIndex) => (
-                        <div key={faqIndex} className="text-sm leading-relaxed text-ink/70">
-                          <span className="font-semibold text-ink/90">Q: {faq.question}</span>
+                        <div
+                          key={faqIndex}
+                          className="text-sm leading-relaxed text-ink/70"
+                        >
+                          <span className="font-semibold text-ink/90">
+                            Q: {faq.question}
+                          </span>
                           <span className="ml-2">{faq.answer}</span>
                         </div>
                       ))}

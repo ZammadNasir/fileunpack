@@ -1,6 +1,6 @@
+import { siteConfig } from "@/src/config/site";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { siteConfig } from "@/src/config/site";
 
 export const metadata: Metadata = {
   title: "Privacy",

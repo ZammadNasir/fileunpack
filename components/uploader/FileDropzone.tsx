@@ -1,20 +1,31 @@
 "use client";
 
-import { ChangeEvent, DragEvent, KeyboardEvent, useId, useRef, useState } from "react";
 import { MAX_FILE_SIZE_MB } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import {
+  ChangeEvent,
+  DragEvent,
+  KeyboardEvent,
+  useId,
+  useRef,
+  useState,
+} from "react";
 
 type FileDropzoneProps = {
   onFileSelected: (file: File) => void;
 };
 
-const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap((format) => format.accepts).join(",");
+const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap(
+  (format) => format.accepts,
+).join(",");
 
 export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const supportedLabel = SUPPORTED_FORMATS.map((format) => format.name).join(" · ");
+  const supportedLabel = SUPPORTED_FORMATS.map((format) => format.name).join(
+    " · ",
+  );
 
   function handleFiles(files: FileList | null) {
     const file = files?.[0];

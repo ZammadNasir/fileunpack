@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { FullscreenViewer } from "@/components/viewer/FullscreenViewer";
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Viewer",

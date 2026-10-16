@@ -1,13 +1,26 @@
 "use client";
 
-import { ChangeEvent, DragEvent, KeyboardEvent, useId, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { MAX_FILE_SIZE_MB } from "@/src/config/site";
 import { validateFile } from "@/src/lib/files";
-import { FormatDefinition, getFormatFromFile, SUPPORTED_FORMATS } from "@/src/lib/formats";
+import {
+  FormatDefinition,
+  getFormatFromFile,
+  SUPPORTED_FORMATS,
+} from "@/src/lib/formats";
 import { savePendingFile } from "@/src/lib/pendingFile";
+import { useRouter } from "next/navigation";
+import {
+  ChangeEvent,
+  DragEvent,
+  KeyboardEvent,
+  useId,
+  useRef,
+  useState,
+} from "react";
 
-const ALL_EXTENSIONS = SUPPORTED_FORMATS.flatMap((format) => format.accepts).join(",");
+const ALL_EXTENSIONS = SUPPORTED_FORMATS.flatMap(
+  (format) => format.accepts,
+).join(",");
 
 type DropFileCardProps = {
   preferredFormat?: FormatDefinition;
@@ -96,7 +109,9 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
         id={inputId}
         className="sr-only"
         type="file"
-        accept={preferredFormat ? `.${preferredFormat.extension}` : ALL_EXTENSIONS}
+        accept={
+          preferredFormat ? `.${preferredFormat.extension}` : ALL_EXTENSIONS
+        }
         onChange={handleChange}
       />
       <span
@@ -119,10 +134,16 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
         </span>
         <span
           className={`mt-5 block font-mono text-xs uppercase tracking-widest underline underline-offset-4 ${
-            status === "error" ? "text-[#9d2d22]" : "text-ink group-hover:text-sage-deep"
+            status === "error"
+              ? "text-[#9d2d22]"
+              : "text-ink group-hover:text-sage-deep"
           }`}
         >
-          {status === "working" ? "Working..." : status === "error" ? "Try another file" : idleCta}
+          {status === "working"
+            ? "Working..."
+            : status === "error"
+              ? "Try another file"
+              : idleCta}
         </span>
       </span>
     </label>

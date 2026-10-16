@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { siteConfig } from "@/src/config/site";
+import Link from "next/link";
+import { useState } from "react";
 
 const NAV_LINKS = [
   { href: "/view", label: "Viewer" },
@@ -12,7 +12,10 @@ const NAV_LINKS = [
   { href: "/privacy", label: "Privacy" },
 ];
 
-const [brandFirst, ...brandRest] = siteConfig.name.trim().toLowerCase().split(/\s+/);
+const [brandFirst, ...brandRest] = siteConfig.name
+  .trim()
+  .toLowerCase()
+  .split(/\s+/);
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -51,10 +54,16 @@ export function Header() {
           className="flex min-w-16 items-center justify-center justify-self-end border-0 bg-transparent px-6 py-4 shadow-none hover:bg-mist"
         >
           <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-          <span aria-hidden="true" className="flex w-7 flex-col gap-[6px]">
-            <span className={`h-[3px] w-full bg-ink transition-transform ${open ? "translate-y-[9px] rotate-45" : ""}`} />
-            <span className={`h-[3px] w-full bg-ink transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`h-[3px] w-full bg-ink transition-transform ${open ? "-translate-y-[9px] -rotate-45" : ""}`} />
+          <span aria-hidden="true" className="flex w-7 flex-col gap-1.5">
+            <span
+              className={`h-0.75 w-full bg-ink transition-transform ${open ? "-translate-y-2.25 rotate-45" : ""}`}
+            />
+            <span
+              className={`h-0.75 w-full bg-ink transition-opacity ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-0.75 w-full bg-ink transition-transform ${open ? "-translate-y-2.25 -rotate-45" : ""}`}
+            />
           </span>
         </button>
       </div>
