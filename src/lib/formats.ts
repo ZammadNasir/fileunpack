@@ -17,6 +17,8 @@ export type FormatDefinition = {
   howToOpen: string;
   withoutSoftware: string;
   limitations?: string;
+  faqs: Array<{ question: string; answer: string }>;
+  relatedFormats: SupportedExtension[];
 };
 
 export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
@@ -36,6 +38,25 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       "Choose an STL file from your device. The viewer reads the mesh in your browser and places it in a simple 3D scene that you can rotate, zoom, and reframe.",
     withoutSoftware:
       "Yes. For supported STL files, you can inspect the model in the browser without installing a slicer, CAD package, or 3D modeling app.",
+    faqs: [
+      {
+        question: "What is the difference between binary and ASCII STL?",
+        answer: "Binary STL files are more compact and faster to load, while ASCII STL files are human-readable text. Both contain the same mesh data in different formats.",
+      },
+      {
+        question: "Can I edit the STL file in this viewer?",
+        answer: "No, this viewer is for inspection only. To edit STL files, you'll need a 3D modeling application like Blender, MeshLab, or CAD software.",
+      },
+      {
+        question: "Why does my STL look faceted or low-resolution?",
+        answer: "STL files only store surface triangles, not smooth curves. The resolution depends on how the model was originally exported. Higher triangle counts produce smoother surfaces.",
+      },
+      {
+        question: "Are STL files suitable for 3D printing?",
+        answer: "Yes, STL is the most common format for 3D printing. However, you may need to check for holes, non-manifold geometry, or scale issues before printing.",
+      },
+    ],
+    relatedFormats: ["obj", "glb", "gltf"],
   },
   obj: {
     extension: "obj",
@@ -55,6 +76,25 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       "Yes, basic OBJ geometry can be opened here without a modeling application. External MTL files and texture folders are not loaded in this MVP.",
     limitations:
       "This first version loads the OBJ geometry you select. If the file depends on separate MTL or texture assets, those materials may not appear.",
+    faqs: [
+      {
+        question: "Why does my OBJ model appear without colors or textures?",
+        answer: "OBJ files often reference separate MTL material files and texture images. This viewer loads the geometry but does not currently parse external material references.",
+      },
+      {
+        question: "What is an MTL file?",
+        answer: "An MTL (Material Template Library) file defines materials, colors, and texture references for an OBJ model. It's usually named the same as the OBJ file and located in the same directory.",
+      },
+      {
+        question: "Can OBJ files contain animations?",
+        answer: "Standard OBJ files are static geometry only. For animated 3D content, consider formats like GLB/GLTF or FBX which support animation data.",
+      },
+      {
+        question: "Is OBJ better than STL for 3D printing?",
+        answer: "OBJ can include more complex geometry and smooth curves, while STL is simpler and more universally supported by 3D printers. For complex organic shapes, OBJ may preserve better detail.",
+      },
+    ],
+    relatedFormats: ["stl", "glb", "gltf"],
   },
   glb: {
     extension: "glb",
@@ -72,6 +112,25 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       "Choose a GLB file from your device. Because GLB usually contains its required assets, it is well suited to local browser viewing.",
     withoutSoftware:
       "Yes. Supported GLB files can be previewed in the browser without a dedicated 3D asset viewer.",
+    faqs: [
+      {
+        question: "What is the difference between GLB and GLTF?",
+        answer: "GLB is a binary format that bundles all assets (geometry, materials, textures) into a single file. GLTF is a JSON-based format that may reference external files. GLB is more portable and easier to share.",
+      },
+      {
+        question: "Can GLB files contain animations?",
+        answer: "Yes, GLB supports skeletal animations, morph targets, and node-based animations. This viewer will display the model, though animation playback support may vary.",
+      },
+      {
+        question: "Why is GLB popular for web 3D?",
+        answer: "GLB is optimized for web delivery with efficient compression, self-contained assets, and widespread browser support. It's designed to be the 'JPEG of 3D'.",
+      },
+      {
+        question: "Can I convert GLB to other formats?",
+        answer: "Yes, tools like Blender, online converters, or command-line utilities can convert GLB to OBJ, STL, FBX, and other formats depending on your needs.",
+      },
+    ],
+    relatedFormats: ["gltf", "obj", "stl"],
   },
   gltf: {
     extension: "gltf",
@@ -91,6 +150,25 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       "Yes for simple or self-contained GLTF files. GLTF projects that rely on separate local assets may need a later multi-file upload flow.",
     limitations:
       "This MVP accepts one GLTF file at a time. External .bin files and texture folders are not reliably resolved yet.",
+    faqs: [
+      {
+        question: "Why does my GLTF file appear incomplete?",
+        answer: "GLTF files often reference external .bin files for geometry data and separate image files for textures. This viewer supports self-contained GLTF files with embedded data URIs.",
+      },
+      {
+        question: "What is a .bin file referenced by GLTF?",
+        answer: "The .bin file contains binary geometry data (vertices, indices, normals) that the GLTF JSON file references. It's usually named the same as the GLTF file and stored alongside it.",
+      },
+      {
+        question: "When should I use GLTF vs GLB?",
+        answer: "Use GLTF when you need to edit the JSON structure or work with external assets separately. Use GLB for a single portable file that's easier to share and deploy.",
+      },
+      {
+        question: "Is GLTF suitable for game development?",
+        answer: "Yes, GLTF is widely supported by game engines and 3D frameworks. It's designed as a transmission format for efficient 3D content delivery.",
+      },
+    ],
+    relatedFormats: ["glb", "obj", "stl"],
   },
   svg: {
     extension: "svg",
@@ -108,6 +186,25 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       "Choose an SVG file and the viewer sanitizes risky markup before displaying it in a sandboxed preview with zoom and pan controls.",
     withoutSoftware:
       "Yes. You can inspect SVG files in your browser without a vector design tool, while still treating the uploaded file as untrusted input.",
+    faqs: [
+      {
+        question: "Why is SVG considered safer than other image formats?",
+        answer: "SVG is text-based XML, which allows for sanitization of potentially malicious scripts. This viewer strips risky elements like scripts before rendering, providing a safer preview experience.",
+      },
+      {
+        question: "Can SVG files contain animations?",
+        answer: "Yes, SVG supports CSS animations, SMIL animations, and JavaScript interactivity. However, this viewer sanitizes scripts for security, so only CSS-based animations may appear.",
+      },
+      {
+        question: "When should I use SVG vs PNG/JPG?",
+        answer: "Use SVG for logos, icons, diagrams, and any graphics that need to scale infinitely without quality loss. Use PNG/JPG for photographs and complex raster artwork.",
+      },
+      {
+        question: "Can I edit SVG files in this viewer?",
+        answer: "No, this viewer is for inspection only. To edit SVG files, use vector design tools like Adobe Illustrator, Inkscape, Figma, or code editors for direct XML editing.",
+      },
+    ],
+    relatedFormats: [],
   },
 };
 
@@ -131,8 +228,4 @@ export function getFormatFromFile(file: File) {
 
 export function isSupportedExtension(value: string): value is SupportedExtension {
   return value in FORMAT_REGISTRY;
-}
-
-export function relatedFormats(current: SupportedExtension) {
-  return SUPPORTED_FORMATS.filter((format) => format.extension !== current);
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DropFileCard } from "@/components/uploader/DropFileCard";
-import { FormatDefinition, relatedFormats } from "@/src/lib/formats";
+import { FormatDefinition, getFormatByExtension } from "@/src/lib/formats";
 import { siteConfig } from "@/src/config/site";
 
 type FormatPageContentProps = {
@@ -98,6 +98,32 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
       </section>
 
       <section
+        aria-labelledby="faqs"
+        className="border-b border-ink/20 px-6 py-16 md:px-10 md:py-20"
+      >
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+          FAQ
+        </p>
+        <h2
+          id="faqs"
+          className="mt-4 max-w-xl font-display text-[clamp(2rem,4vw,3.4rem)] font-black leading-[0.95] tracking-[-0.02em]"
+        >
+          Frequently asked questions about {format.name}
+        </h2>
+
+        <div className="mt-12 space-y-6">
+          {format.faqs.map((faq, index) => (
+            <article key={index} className="border-t-2 border-ink pt-4">
+              <strong className="block font-display text-xl font-black tracking-tight">
+                {faq.question}
+              </strong>
+              <p className="mt-2 leading-relaxed text-ink/75">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
         aria-labelledby="related-formats"
         className="px-6 py-16 md:px-10 md:py-20"
       >
@@ -111,19 +137,35 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
           Related formats
         </h2>
         <ul className="mt-8 max-w-3xl list-none p-0">
-          {relatedFormats(format.extension).map((related) => (
-            <li key={related.extension}>
-              <Link
-                href={`/open/${related.extension}`}
-                className="flex items-baseline justify-between border-b border-ink/20 py-4 font-display text-2xl font-bold tracking-tight transition-colors hover:bg-sage"
-              >
-                <span>{related.name}</span>
-                <span className="font-mono text-xs font-normal tracking-widest text-ink/60">
-                  .{related.extension}
-                </span>
-              </Link>
-            </li>
-          ))}
+          {format.relatedFormats.map((relatedExtension) => {
+            const related = getFormatByExtension(relatedExtension);
+            if (!related) return null;
+            return (
+              <li key={related.extension}>
+                <Link
+                  href={`/open/${related.extension}`}
+                  className="block border-b border-ink/20 py-6 transition-colors hover:bg-sage"
+                >
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-display text-2xl font-bold tracking-tight">
+                      {related.name}
+                    </span>
+                    <span className="font-mono text-xs font-normal tracking-widest text-ink/60">
+                      .{related.extension}
+                    </span>
+                  </div>
+                  <div className="mt-3 space-y-2">
+                    {related.faqs.slice(0, 2).map((faq, faqIndex) => (
+                      <div key={faqIndex} className="text-sm leading-relaxed text-ink/70">
+                        <span className="font-semibold text-ink/90">Q: {faq.question}</span>
+                        <span className="ml-2">{faq.answer}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </section>
     </main>
