@@ -21,11 +21,10 @@ const STEPS = [
   },
 ];
 
-const TICKER_ITEMS = [
-  ...SUPPORTED_FORMATS.map((format) => `.${format.name}`),
-  siteConfig.tagline.toUpperCase(),
-  "PROCESSED LOCALLY WHENEVER POSSIBLE",
-];
+const TICKER_CATEGORIES = getCategories().map((category) => ({
+  category,
+  formats: SUPPORTED_FORMATS.filter((format) => format.category === category),
+}));
 
 const formatList = SUPPORTED_FORMATS.map((format) => format.name).join(", ");
 
@@ -81,9 +80,17 @@ export default function Home() {
                 key={copy}
                 className="flex shrink-0 items-center gap-10 pr-10 font-mono text-sm uppercase tracking-[0.2em]"
               >
-                {TICKER_ITEMS.map((item) => (
-                  <span key={item} className="whitespace-nowrap">
-                    {item}
+                {TICKER_CATEGORIES.map(({ category, formats }) => (
+                  <span
+                    key={category}
+                    className="flex shrink-0 items-center gap-3 whitespace-nowrap"
+                  >
+                    <span className="text-paper/55">{category}</span>
+                    <span className="flex items-center gap-3">
+                      {formats.map((format) => (
+                        <span key={format.extension}>.{format.extension}</span>
+                      ))}
+                    </span>
                   </span>
                 ))}
               </div>
