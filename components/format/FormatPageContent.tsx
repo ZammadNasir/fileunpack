@@ -10,8 +10,8 @@ type FormatPageContentProps = {
 export function FormatPageContent({ format }: FormatPageContentProps) {
   return (
     <main>
-      <section className="grid border-b border-ink/20 lg:grid-cols-2">
-        <div className="flex min-h-[72vh] flex-col justify-between gap-16 border-b border-ink/20 bg-sage px-6 py-12 md:px-10 md:py-16 lg:border-b-0 lg:border-r">
+      <section className="flex h-[calc(100svh_-_var(--header-h))] min-w-0 flex-col overflow-hidden border-b border-ink/20 lg:grid lg:grid-cols-2">
+        <div className="flex min-h-0 min-w-0 flex-auto flex-col justify-between gap-6 border-b border-ink/20 bg-sage px-6 py-6 md:px-10 md:py-8 lg:border-b-0 lg:border-r">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
             {format.category} viewer
           </p>
@@ -26,17 +26,17 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
           </div>
         </div>
 
-        <div className="grid lg:grid-rows-2">
+        <div className="grid min-h-0 min-w-0 flex-auto grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
           <DropFileCard preferredFormat={format} />
 
           <a
             href="#format-guide"
-            className="flex min-h-[300px] flex-col justify-center border-b border-ink/20 bg-white px-6 py-12 hover:bg-mist md:px-10"
+            className="flex min-w-0 flex-col justify-center overflow-hidden border-b border-ink/20 bg-white px-6 py-8 hover:bg-mist md:px-10 lg:py-12"
           >
             <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Action_02
             </span>
-            <span className="mt-3 block font-display text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none text-sage-deep">
+            <span className="mt-3 block font-display text-[clamp(1.5rem,4vw,3.4rem)] font-black leading-none text-sage-deep">
               {format.name} Specs &amp; Limits
             </span>
             <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">

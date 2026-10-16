@@ -78,7 +78,7 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
 
   return (
     <label
-      className={`group relative flex min-h-[300px] cursor-pointer flex-col justify-center overflow-hidden border-b border-ink/20 bg-mist px-6 py-12 md:px-10 ${
+      className={`group relative flex min-h-0 min-w-0 cursor-pointer flex-col justify-center overflow-hidden border-b border-ink/20 bg-mist px-6 py-8 md:px-10 lg:py-12 max-lg:border-r ${
         isDragging ? "outline-2 -outline-offset-2 outline-ink" : ""
       }`}
       htmlFor={inputId}
@@ -107,7 +107,7 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
         <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
           {preferredFormat ? `${preferredFormat.name}_Picker` : "Action_01"}
         </span>
-        <span className="mt-3 block font-display text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none text-ink">
+        <span className="mt-3 block font-display text-[clamp(1.5rem,4vw,3.4rem)] font-black leading-none text-ink">
           Drop {preferredFormat ? `${preferredFormat.name} File` : "File"}
         </span>
         <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
