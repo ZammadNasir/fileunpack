@@ -15,6 +15,7 @@ import {
   DragEvent,
   KeyboardEvent,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -34,6 +35,14 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "working" | "error">("idle");
+
+  useLayoutEffect(() => {
+    return () => {
+      setStatus("idle");
+      setMessage("");
+      setIsDragging(false);
+    };
+  }, []);
 
   const idleBody = preferredFormat
     ? `Choose or drag a ${preferredFormat.name} file to view it full screen in your browser.`

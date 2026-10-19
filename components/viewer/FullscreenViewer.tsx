@@ -18,7 +18,7 @@ import {
 import dynamic from "next/dynamic";
 import { ChevronLeft, ChevronRight, PanelLeft, Plus, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const ThreeViewer = dynamic(
   () =>
@@ -149,16 +149,40 @@ export function FullscreenViewer() {
 
     void readPendingFile().then((file) => {
       if (cancelled) return;
-      if (file) {
+      setSession((current) => {
+        if (!file) {
+          return current.kind === "loading" ? { kind: "empty" } : current;
+        }
+
+        if (current.kind === "active") {
+          const key = fileKey(file);
+          const existing = current.entries.find(
+            (entry) => fileKey(entry.file) === key,
+          );
+          if (existing) {
+            return { ...current, activeId: existing.id };
+          }
+          const entry = createEntry(file);
+          return {
+            kind: "active",
+            entries: [...current.entries, entry],
+            activeId: entry.id,
+          };
+        }
+
         const entry = createEntry(file);
-        setSession({ kind: "active", entries: [entry], activeId: entry.id });
-      } else {
-        setSession({ kind: "empty" });
-      }
+        return { kind: "active", entries: [entry], activeId: entry.id };
+      });
     });
 
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    return () => {
+      setIsDragging(false);
     };
   }, []);
 
