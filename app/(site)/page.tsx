@@ -75,7 +75,7 @@ export default function Home() {
       />
       <div>
         <section className="hero-grid grid min-w-0 grid-cols-1 border-b border-ink/15 lg:grid-cols-2">
-          <div className="hero-copy flex min-w-0 flex-col justify-between gap-12 bg-sage px-6 py-10 md:px-10 md:py-14 lg:px-14">
+          <div className="hero-copy flex min-w-0 flex-col justify-evenly gap-12 bg-sage px-6 py-10 md:px-10 md:py-14 lg:px-14">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Browser-first file inspection
             </p>
@@ -291,8 +291,8 @@ export default function Home() {
             <h3>Can I edit or convert a file here?</h3>
             <p>
               No. File Unpack is for previewing and inspecting files, not
-              editing or converting them. Use a dedicated editor or converter
-              if you need to change a file.
+              editing or converting them. Use a dedicated editor or converter if
+              you need to change a file.
             </p>
           </article>
           <article>

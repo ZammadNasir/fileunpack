@@ -13,14 +13,14 @@ import {
 } from "react";
 
 type FileDropzoneProps = {
-  onFileSelected: (file: File) => void;
+  onFilesSelected: (files: File[]) => void;
 };
 
 const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap(
   (format) => format.accepts,
 ).join(",");
 
-export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
+export function FileDropzone({ onFilesSelected }: FileDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,8 +29,8 @@ export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
   );
 
   function handleFiles(files: FileList | null) {
-    const file = files?.[0];
-    if (file) onFileSelected(file);
+    const selected = files ? Array.from(files) : [];
+    if (selected.length > 0) onFilesSelected(selected);
     if (inputRef.current) inputRef.current.value = "";
   }
 
@@ -69,13 +69,14 @@ export function FileDropzone({ onFileSelected }: FileDropzoneProps) {
         id={inputId}
         className="sr-only"
         type="file"
+        multiple
         accept={ACCEPTED_EXTENSIONS}
         onChange={handleChange}
       />
-      <span className="dropzone-kicker">Drop a file here</span>
+      <span className="dropzone-kicker">Drop files here</span>
       <span className="dropzone-title">
         <Upload aria-hidden="true" size={18} strokeWidth={1.8} />
-        Choose a file
+        Choose files
       </span>
       <span className="dropzone-meta">
         {supportedLabel} · up to {MAX_FILE_SIZE_MB} MB
