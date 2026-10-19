@@ -19,14 +19,13 @@ type FileDropzoneProps = {
 const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap(
   (format) => format.accepts,
 ).join(",");
+const formatCount = SUPPORTED_FORMATS.length;
 
 export function FileDropzone({ onFilesSelected }: FileDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const supportedLabel = SUPPORTED_FORMATS.map((format) => format.name).join(
-    " · ",
-  );
+  const supportedLabel = `${formatCount}+ file formats`;
 
   function handleFiles(files: FileList | null) {
     const selected = files ? Array.from(files) : [];

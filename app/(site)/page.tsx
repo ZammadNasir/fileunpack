@@ -1,14 +1,14 @@
 import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS, getCategories } from "@/src/lib/formats";
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
+const formatCount = SUPPORTED_FORMATS.length;
 const formatNames = SUPPORTED_FORMATS.map((format) => format.name);
 const formatsForMetadata = formatNames.join(", ");
 const homeTitle = `Online File Viewer for ${formatsForMetadata} | ${siteConfig.name}`;
-const homeDescription =
-  "Open STL, OBJ, GLB, GLTF, and SVG files online. Preview 3D models and vector images in your browser—no installation, account, or file upload required.";
+const homeDescription = `Open ${formatCount}+ file formats online. Preview 3D models, vector images, and more in your browser—no installation, account, or file upload required.`;
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
@@ -51,8 +51,6 @@ const TICKER_CATEGORIES = getCategories().map((category) => ({
   formats: SUPPORTED_FORMATS.filter((format) => format.category === category),
 }));
 
-const formatList = SUPPORTED_FORMATS.map((format) => format.name).join(", ");
-
 export default function Home() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -84,9 +82,10 @@ export default function Home() {
                 Open files right in your browser.
               </h1>
               <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink/80">
-                Use this online file viewer to open {formatList} without
-                installing specialized software. Preview 3D models and vector
-                images in your browser; no account or file upload is required.
+                Use this online file viewer to open {formatCount}+ file formats
+                without installing specialized software. Preview 3D models,
+                vector images, and more in your browser; no account or file
+                upload is required.
               </p>
             </div>
           </div>
@@ -105,8 +104,8 @@ export default function Home() {
                 Supported Formats
               </span>
               <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
-                {formatList} today &mdash; the registry is data-driven, so new
-                formats slot in without a rewrite.
+                {formatCount}+ formats today &mdash; the registry is
+                data-driven, so new formats slot in without a rewrite.
               </span>
             </Link>
           </div>
@@ -268,16 +267,15 @@ export default function Home() {
           <article>
             <h3>Which file formats can I open?</h3>
             <p>
-              The viewer currently supports {formatList}. Open a format guide
-              for details about each viewer and its capabilities.
+              The viewer currently supports {formatCount}+ file formats. Open a
+              format guide for details about each viewer and its capabilities.
             </p>
-            <div className="format-link-row mt-4">
-              {SUPPORTED_FORMATS.map((format) => (
-                <Link key={format.extension} href={`/open/${format.extension}`}>
-                  {format.name}
-                </Link>
-              ))}
-            </div>
+            <Link
+              href="/#formats"
+              className="mt-4 inline-block font-semibold text-sage-deep underline underline-offset-4"
+            >
+              View all supported formats
+            </Link>
           </article>
           <article>
             <h3>Are my files uploaded?</h3>

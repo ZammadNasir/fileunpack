@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
+  const formatCount = SUPPORTED_FORMATS.length;
+
   return (
     <footer className="site-footer">
       <div>
@@ -29,11 +31,7 @@ export function Footer() {
         <a href="mailto:feedback@fileunpack.com">Feedback</a>
       </nav>
       <div className="footer-format-row" aria-label="Supported formats">
-        {SUPPORTED_FORMATS.map((format) => (
-          <Link key={format.extension} href={`/open/${format.extension}`}>
-            {format.name}
-          </Link>
-        ))}
+        <Link href="/#formats">{formatCount}+ supported formats</Link>
       </div>
     </footer>
   );

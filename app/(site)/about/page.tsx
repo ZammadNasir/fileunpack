@@ -17,6 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const formatCount = SUPPORTED_FORMATS.length;
+
   return (
     <main className="format-page">
       <section className="format-hero">
@@ -44,9 +46,8 @@ export default function AboutPage() {
         <article>
           <h2>What it supports today</h2>
           <p>
-            {SUPPORTED_FORMATS.map((format) => format.name).join(", ")} ship in
-            this release. More uncommon formats are slotted into the same
-            registry as the viewer architecture grows.
+            {formatCount}+ file formats ship in this release. More uncommon formats
+            are slotted into the same registry as the viewer architecture grows.
           </p>
         </article>
         <article>
@@ -69,13 +70,12 @@ export default function AboutPage() {
 
       <section className="related-section" aria-labelledby="about-formats">
         <h2 id="about-formats">Supported formats</h2>
-        <div className="format-link-row">
-          {SUPPORTED_FORMATS.map((format) => (
-            <Link key={format.extension} href={`/open/${format.extension}`}>
-              {format.name}
-            </Link>
-          ))}
-        </div>
+        <Link
+          href="/#formats"
+          className="inline-block font-semibold text-sage-deep underline underline-offset-4"
+        >
+          View all {formatCount}+ supported formats
+        </Link>
       </section>
     </main>
   );

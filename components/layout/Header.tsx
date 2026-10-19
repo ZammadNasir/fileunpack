@@ -1,8 +1,8 @@
 "use client";
 
 import { siteConfig } from "@/src/config/site";
-import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <header className="site-header sticky top-0 z-50 border-b border-ink/10 bg-paper">
-      <div className="grid min-h-[var(--header-h)] grid-cols-[1fr_auto] md:grid-cols-3">
+      <div className="grid min-h-(--header-h) grid-cols-[1fr_auto] md:grid-cols-3">
         <Link
           href="/"
           onClick={() => setOpen(false)}
@@ -50,7 +50,11 @@ export function Header() {
           className="nav-toggle flex min-h-11 min-w-11 items-center justify-center justify-self-end border-0 bg-transparent px-4 text-ink transition-colors hover:bg-mist md:mr-5"
         >
           <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-          {open ? <X aria-hidden="true" size={20} strokeWidth={1.8} /> : <Menu aria-hidden="true" size={20} strokeWidth={1.8} />}
+          {open ? (
+            <X aria-hidden="true" size={20} strokeWidth={1.8} />
+          ) : (
+            <Menu aria-hidden="true" size={20} strokeWidth={1.8} />
+          )}
         </button>
       </div>
 
