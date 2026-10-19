@@ -52,6 +52,10 @@
     font-family: "Aptos", "Segoe UI", system-ui, sans-serif;
   }
 
+  body.global-drag-active {
+    background: #f2f5ef;
+  }
+
   body,
   button,
   input,

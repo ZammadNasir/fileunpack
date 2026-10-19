@@ -88,6 +88,7 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
 
   function handleDrop(event: DragEvent<HTMLLabelElement>) {
     event.preventDefault();
+    event.stopPropagation();
     setIsDragging(false);
     handleFiles(event.dataTransfer.files);
   }
@@ -107,9 +108,13 @@ export function DropFileCard({ preferredFormat }: DropFileCardProps) {
       aria-busy={status === "working"}
       onDragOver={(event) => {
         event.preventDefault();
+        event.stopPropagation();
         setIsDragging(true);
       }}
-      onDragLeave={() => setIsDragging(false)}
+      onDragLeave={(event) => {
+        event.stopPropagation();
+        setIsDragging(false);
+      }}
       onDrop={handleDrop}
       onKeyDown={handleKeyDown}
     >

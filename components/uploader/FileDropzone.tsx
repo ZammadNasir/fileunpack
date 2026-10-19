@@ -36,6 +36,7 @@ export function FileDropzone({ onFilesSelected }: FileDropzoneProps) {
 
   function handleDrop(event: DragEvent<HTMLLabelElement>) {
     event.preventDefault();
+    event.stopPropagation();
     setIsDragging(false);
     handleFiles(event.dataTransfer.files);
   }
@@ -58,9 +59,13 @@ export function FileDropzone({ onFilesSelected }: FileDropzoneProps) {
       tabIndex={0}
       onDragOver={(event) => {
         event.preventDefault();
+        event.stopPropagation();
         setIsDragging(true);
       }}
-      onDragLeave={() => setIsDragging(false)}
+      onDragLeave={(event) => {
+        event.stopPropagation();
+        setIsDragging(false);
+      }}
       onDrop={handleDrop}
       onKeyDown={handleKeyDown}
     >
