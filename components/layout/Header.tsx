@@ -1,6 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/src/config/site";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,8 +24,16 @@ export function Header() {
           href="/"
           onClick={() => setOpen(false)}
           aria-label={`${siteConfig.name} home`}
-          className="flex items-center border-r border-ink/10 px-6 py-4 font-display text-xl font-bold tracking-tight no-underline md:px-10"
+          className="flex items-center gap-3 border-r border-ink/10 px-6 py-4 font-display text-xl font-bold tracking-tight no-underline md:px-10"
         >
+          <Image
+            src="/favicon-96x96.png"
+            alt=""
+            aria-hidden="true"
+            width={40}
+            height={40}
+            className="h-10 w-10 shrink-0"
+          />
           {siteConfig.name}
         </Link>
 

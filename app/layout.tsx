@@ -10,6 +10,29 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      {
+        url: "/favicon-96x96.png",
+        type: "image/png",
+        sizes: "96x96",
+      },
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/favicon.ico",
+    apple: {
+      url: "/apple-touch-icon.png",
+      type: "image/png",
+      sizes: "180x180",
+    },
+  },
+  appleWebApp: {
+    title: siteConfig.name,
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: `${siteConfig.name} - Open uncommon files online`,
     description: siteConfig.description,

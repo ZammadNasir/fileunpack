@@ -1,5 +1,6 @@
 import { siteConfig } from "@/src/config/site";
 import { SUPPORTED_FORMATS } from "@/src/lib/formats";
+import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
@@ -7,6 +8,14 @@ export function Footer() {
     <footer className="site-footer">
       <div>
         <Link className="footer-brand" href="/">
+          <Image
+            src="/favicon-96x96.png"
+            alt=""
+            aria-hidden="true"
+            width={36}
+            height={36}
+            className="h-9 w-9 shrink-0"
+          />
           {siteConfig.name}
         </Link>
         <p>Browser-first file viewing for formats that are awkward to open.</p>
