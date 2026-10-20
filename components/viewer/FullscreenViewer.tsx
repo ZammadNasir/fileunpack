@@ -29,14 +29,6 @@ const ThreeViewer = dynamic(
   },
 );
 
-const SvgViewer = dynamic(
-  () => import("@/components/viewers/SvgViewer").then((mod) => mod.SvgViewer),
-  {
-    ssr: false,
-    loading: () => <ViewerLoading />,
-  },
-);
-
 const RtfViewer = dynamic(
   () => import("@/components/viewers/RtfViewer").then((mod) => mod.RtfViewer),
   {
@@ -132,8 +124,6 @@ function renderActiveEntry(entry: ViewerEntry) {
           extension={format.extension}
         />
       );
-    case "svg":
-      return <SvgViewer key={entry.id} file={entry.file} />;
     case "rtf":
       return <RtfViewer key={entry.id} file={entry.file} />;
     default:

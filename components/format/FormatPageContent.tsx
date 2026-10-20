@@ -25,9 +25,19 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
               no account, no upload queue, no ceremony.
             </p>
           </div>
+          <div className="max-w-md">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+              Quick stats
+            </p>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink/75">
+              <li>• Files up to {siteConfig.maxFileSizeMB} MB supported</li>
+              <li>• {format.features.length} viewer features available</li>
+              <li>• Processed locally in your browser</li>
+            </ul>
+          </div>
         </div>
 
-        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-auto">
+        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-3">
           <DropFileCard preferredFormat={format} />
 
           <a

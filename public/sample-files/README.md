@@ -15,7 +15,6 @@ When adding a new format to the viewer, follow these steps:
 
 ## Current Sample Files
 
-- `sample.svg` - Sample SVG vector image
 - `sample.rtf` - Sample RTF document
 - `sample.stl` - Sample STL 3D model
 - `sample.obj` - Sample OBJ 3D model

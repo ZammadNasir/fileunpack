@@ -1,7 +1,7 @@
 import { siteConfig } from "@/src/config/site";
 
 export type SupportedExtension = (typeof siteConfig.supportedFormats)[number];
-export type ViewerType = "3d" | "svg" | "rtf" | "unsupported";
+export type ViewerType = "3d" | "rtf" | "unsupported";
 export type FormatCategory =
   | "3D"
   | "CAD"
@@ -184,43 +184,6 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     ],
     relatedFormats: ["glb", "obj", "stl"],
     sampleFile: "/sample-files/sample.gltf",
-  },
-  svg: {
-    extension: "svg",
-    name: "SVG",
-    category: "Image",
-    viewer: "svg",
-    supported: true,
-    description:
-      "Open SVG vector files safely with zoom, pan, fit-to-screen, and dimension details.",
-    accepts: [".svg", "image/svg+xml"],
-    features: ["Sandboxed SVG rendering", "Zoom, pan, reset, and fit controls", "Dimension detection", "Malformed-file error handling"],
-    whatIs:
-      "An SVG file is a vector image written in XML. It can describe icons, diagrams, logos, maps, charts, and interface artwork without losing sharpness when scaled.",
-    howToOpen:
-      "Choose an SVG file and the viewer sanitizes risky markup before displaying it in a sandboxed preview with zoom and pan controls.",
-    withoutSoftware:
-      "Yes. You can inspect SVG files in your browser without a vector design tool, while still treating the uploaded file as untrusted input.",
-    faqs: [
-      {
-        question: "Why is SVG considered safer than other image formats?",
-        answer: "SVG is text-based XML, which allows for sanitization of potentially malicious scripts. This viewer strips risky elements like scripts before rendering, providing a safer preview experience.",
-      },
-      {
-        question: "Can SVG files contain animations?",
-        answer: "Yes, SVG supports CSS animations, SMIL animations, and JavaScript interactivity. However, this viewer sanitizes scripts for security, so only CSS-based animations may appear.",
-      },
-      {
-        question: "When should I use SVG vs PNG/JPG?",
-        answer: "Use SVG for logos, icons, diagrams, and any graphics that need to scale infinitely without quality loss. Use PNG/JPG for photographs and complex raster artwork.",
-      },
-      {
-        question: "Can I edit SVG files in this viewer?",
-        answer: "No, this viewer is for inspection only. To edit SVG files, use vector design tools like Adobe Illustrator, Inkscape, Figma, or code editors for direct XML editing.",
-      },
-    ],
-    relatedFormats: [],
-    sampleFile: "/sample-files/sample.svg",
   },
   rtf: {
     extension: "rtf",

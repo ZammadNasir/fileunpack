@@ -8,7 +8,7 @@ export const siteConfig = {
   tagline: "Open files without the software",
   version: "0.1.0",
   maxFileSizeMB: 100,
-  supportedFormats: ["stl", "obj", "glb", "gltf", "svg", "rtf"] as const,
+  supportedFormats: ["stl", "obj", "glb", "gltf", "rtf"] as const,
 };
 
 export const MAX_FILE_SIZE_MB = siteConfig.maxFileSizeMB;

@@ -1,6 +1,6 @@
 # File Unpack
 
-File Unpack is a browser-first online file viewer for uncommon formats. The MVP opens STL, OBJ, GLB, GLTF, and SVG files without accounts, databases, uploads, or server-side file storage.
+File Unpack is a browser-first online file viewer for uncommon formats. The MVP opens STL, OBJ, GLB, GLTF, and RTF files without accounts, databases, uploads, or server-side file storage.
 
 ## Tech stack
 
@@ -33,12 +33,12 @@ The app routes files through a central registry in `src/lib/formats.ts`.
 
 1. The selected file extension is normalized with `getExtension`.
 2. The extension is looked up in `FORMAT_REGISTRY`.
-3. The registry chooses a viewer family: `3d`, `svg`, or `unsupported`.
+3. The registry chooses a viewer family: `3d`, `rtf`, or `unsupported`.
 4. `FullscreenViewer` lazy-loads the matching viewer so Three.js is not loaded on informational pages until a 3D file is selected.
 
 3D formats share `components/viewers/ThreeViewer.tsx`. Format-specific parsing happens in `loadModel`, while camera controls, fit, reset, lighting, model inspection, and wireframe mode stay common.
 
-SVG files use `components/viewers/SvgViewer.tsx`, which parses XML, removes risky tags and attributes, and renders the result in a sandboxed iframe.
+RTF files use `components/viewers/RtfViewer.tsx`, which parses rich text format and renders formatted content with tables and images.
 
 ## Add a new format
 
@@ -68,7 +68,7 @@ Visible branding, metadata, footer text, and page titles read from that value.
 - OBJ material files and textures are not loaded in this MVP.
 - Single-file GLTF works best when assets are embedded as data URIs. External `.bin` files and texture folders need a future multi-file selection flow.
 - Very large files are rejected client-side using `MAX_FILE_SIZE_MB`.
-- SVG sanitization is intentionally conservative, but uploaded SVG should still be treated as untrusted input.
+- RTF viewer renders as continuous formatted text; complex page layout, headers/footers, and some legacy image types may appear differently than in desktop word processors.
 
 ## Licensing and attribution
 
