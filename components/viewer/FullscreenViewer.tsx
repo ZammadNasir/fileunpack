@@ -37,6 +37,14 @@ const SvgViewer = dynamic(
   },
 );
 
+const RtfViewer = dynamic(
+  () => import("@/components/viewers/RtfViewer").then((mod) => mod.RtfViewer),
+  {
+    ssr: false,
+    loading: () => <ViewerLoading />,
+  },
+);
+
 const ACCEPTED_EXTENSIONS = SUPPORTED_FORMATS.flatMap(
   (format) => format.accepts,
 ).join(",");
@@ -126,6 +134,8 @@ function renderActiveEntry(entry: ViewerEntry) {
       );
     case "svg":
       return <SvgViewer key={entry.id} file={entry.file} />;
+    case "rtf":
+      return <RtfViewer key={entry.id} file={entry.file} />;
     default:
       return (
         <UnsupportedFile

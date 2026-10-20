@@ -3,7 +3,7 @@
 import { validateFile } from "@/src/lib/files";
 import { savePendingFile } from "@/src/lib/pendingFile";
 import { useRouter } from "next/navigation";
-import { DragEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export function GlobalFileDrop() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export function GlobalFileDrop() {
   useEffect(() => {
     function handleDragOver(event: DragEvent) {
       // Only prevent default if files are being dragged
-      if (event.dataTransfer.types.includes("Files")) {
+      if (event.dataTransfer?.types.includes("Files")) {
         event.preventDefault();
         document.body.classList.add("global-drag-active");
       }
@@ -42,7 +42,7 @@ export function GlobalFileDrop() {
       // Prevent multiple simultaneous drops
       if (isProcessingRef.current) return;
 
-      const files = event.dataTransfer.files;
+      const files = event.dataTransfer?.files;
       if (!files || files.length === 0) return;
 
       const file = files[0];

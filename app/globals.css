@@ -237,7 +237,8 @@
 }
 
 .canvas-frame,
-.svg-frame {
+.svg-frame,
+.rtf-frame {
   width: 100%;
   height: min(62vh, 560px);
   min-height: 360px;
@@ -246,18 +247,21 @@
   background: var(--color-surface-muted);
 }
 
-.svg-frame {
+.svg-frame,
+.rtf-frame {
   display: grid;
   place-items: center;
   touch-action: none;
   cursor: grab;
 }
 
-.svg-frame.is-panning {
+.svg-frame.is-panning,
+.rtf-frame.is-panning {
   cursor: grabbing;
 }
 
-.svg-frame iframe {
+.svg-frame iframe,
+.rtf-frame iframe {
   width: 88%;
   height: 88%;
   border: 0;

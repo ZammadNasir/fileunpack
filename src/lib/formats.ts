@@ -1,7 +1,7 @@
 import { siteConfig } from "@/src/config/site";
 
 export type SupportedExtension = (typeof siteConfig.supportedFormats)[number];
-export type ViewerType = "3d" | "svg" | "unsupported";
+export type ViewerType = "3d" | "svg" | "rtf" | "unsupported";
 export type FormatCategory =
   | "3D"
   | "CAD"
@@ -212,6 +212,54 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       {
         question: "Can I edit SVG files in this viewer?",
         answer: "No, this viewer is for inspection only. To edit SVG files, use vector design tools like Adobe Illustrator, Inkscape, Figma, or code editors for direct XML editing.",
+      },
+    ],
+    relatedFormats: [],
+  },
+  rtf: {
+    extension: "rtf",
+    name: "RTF",
+    category: "Document",
+    viewer: "rtf",
+    supported: true,
+    description:
+      "Read RTF documents online with formatted text, images, tables, and zoom controls.",
+    accepts: [".rtf", "application/rtf", "text/rtf"],
+    features: [
+      "Rich text formatting with fonts, sizes, and colors",
+      "Paragraph alignment, spacing, and lists",
+      "Tables and embedded images",
+      "Unicode and codepage text handling",
+      "Zoom, pan, reset, and fit controls",
+    ],
+    whatIs:
+      "An RTF (Rich Text Format) file stores formatted text documents. It supports fonts, styles, colors, lists, tables, and embedded images, and is commonly produced by word processors and Windows applications.",
+    howToOpen:
+      "Choose an RTF file from your device. The viewer parses the document in your browser and renders it on a page-style canvas you can zoom and pan.",
+    withoutSoftware:
+      "Yes. You can read RTF files in the browser without installing Microsoft Word, LibreOffice, or another office suite.",
+    limitations:
+      "This viewer renders the document as continuous formatted text. Complex page layout, headers and footers, footnotes, and some legacy image types may appear differently than in a desktop word processor.",
+    faqs: [
+      {
+        question: "What is the difference between RTF and DOCX?",
+        answer:
+          "RTF is a plain-text-based format designed for interchange between word processors, while DOCX is Microsoft Word's newer XML-based format. RTF files are often larger but more portable across different applications.",
+      },
+      {
+        question: "Can RTF files contain images?",
+        answer:
+          "Yes. RTF can embed images such as PNG, JPEG, and legacy Windows metafile formats. This viewer displays embedded images inline with the text.",
+      },
+      {
+        question: "Why does my RTF look different here than in Word?",
+        answer:
+          "RTF supports complex page layout features like headers, footnotes, floating text boxes, and precise pagination. This viewer renders the core formatted content as flowing text, so some layout details may differ.",
+      },
+      {
+        question: "Can I edit RTF files in this viewer?",
+        answer:
+          "No, this viewer is for reading and inspection only. To edit RTF files, use a word processor such as Microsoft Word, LibreOffice Writer, or a plain text editor.",
       },
     ],
     relatedFormats: [],

@@ -13,6 +13,7 @@
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "rtf.js": "^3.0.9",
     "three": "^0.186.1"
   },
   "devDependencies": {

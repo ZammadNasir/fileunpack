@@ -14,7 +14,7 @@ export function UnsupportedFile({ extension, message }: UnsupportedFileProps) {
       </h2>
       <p>
         {message ??
-          "This viewer currently supports STL, OBJ, GLB, GLTF, and SVG files."}
+          "This viewer currently supports STL, OBJ, GLB, GLTF, SVG, and RTF files."}
       </p>
     </div>
   );
