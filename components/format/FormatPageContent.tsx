@@ -1,6 +1,7 @@
 import { DropFileCard } from "@/components/uploader/DropFileCard";
 import { siteConfig } from "@/src/config/site";
 import { FormatDefinition, getFormatByExtension } from "@/src/lib/formats";
+import { Download } from "lucide-react";
 import Link from "next/link";
 
 type FormatPageContentProps = {
@@ -26,7 +27,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
           </div>
         </div>
 
-        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-auto">
           <DropFileCard preferredFormat={format} />
 
           <a
@@ -46,6 +47,25 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
                 `No known limitations for ${format.name} files in this viewer.`}
             </span>
           </a>
+
+          {format.sampleFile && (
+            <a
+              href={format.sampleFile}
+              download={`sample.${format.extension}`}
+              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist md:px-10 lg:py-12"
+            >
+              <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
+                Try it out
+              </span>
+              <span className="mt-3 flex items-center gap-2 font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
+                <Download aria-hidden="true" size={32} strokeWidth={1.5} />
+                Download sample {format.name} file
+              </span>
+              <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
+                Get a sample {format.name} file to test the viewer.
+              </span>
+            </a>
+          )}
         </div>
       </section>
 

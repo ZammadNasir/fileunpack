@@ -29,6 +29,7 @@ export type FormatDefinition = {
   limitations?: string;
   faqs: Array<{ question: string; answer: string }>;
   relatedFormats: SupportedExtension[];
+  sampleFile?: string;
 };
 
 export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
@@ -67,6 +68,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: ["obj", "glb", "gltf"],
+    sampleFile: "/sample-files/sample.stl",
   },
   obj: {
     extension: "obj",
@@ -105,6 +107,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: ["stl", "glb", "gltf"],
+    sampleFile: "/sample-files/sample.obj",
   },
   glb: {
     extension: "glb",
@@ -141,6 +144,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: ["gltf", "obj", "stl"],
+    sampleFile: "/sample-files/sample.glb",
   },
   gltf: {
     extension: "gltf",
@@ -179,6 +183,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: ["glb", "obj", "stl"],
+    sampleFile: "/sample-files/sample.gltf",
   },
   svg: {
     extension: "svg",
@@ -215,6 +220,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: [],
+    sampleFile: "/sample-files/sample.svg",
   },
   rtf: {
     extension: "rtf",
@@ -263,6 +269,7 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
       },
     ],
     relatedFormats: [],
+    sampleFile: "/sample-files/sample.rtf",
   },
 };
 
