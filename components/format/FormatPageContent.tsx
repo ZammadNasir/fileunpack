@@ -38,7 +38,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
 
             <a
               href="#open-file"
-              className="mt-7 inline-flex min-h-12 items-center justify-center bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sage-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+              className="mt-7 inline-flex min-h-12 items-center justify-center bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sage-deep focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               Open {formatLabel} file
             </a>
@@ -71,7 +71,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
 
           <a
             href="#format-guide"
-            className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
+            className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
           >
             <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Format details
@@ -93,7 +93,7 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
             <a
               href={format.sampleFile}
               download={`sample.${format.extension}`}
-              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
+              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
             >
               <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
                 Example file
