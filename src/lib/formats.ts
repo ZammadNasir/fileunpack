@@ -40,31 +40,46 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     viewer: "3d",
     supported: true,
     description:
-      "Preview STL mesh files online with orbit controls, fit-to-view, and a solid or wireframe display.",
+      "Use our free online STL viewer to inspect 3D mesh files directly in your browser with interactive orbit controls, fit-to-view, and solid or wireframe display.",
     accepts: [".stl"],
-    features: ["Binary and ASCII STL loading", "Orbit, zoom, and reset controls", "Fit model to screen", "Solid and wireframe viewing", "Basic mesh information"],
+    features: [
+      "Fast binary and ASCII STL file loading",
+      "Interactive orbit, zoom, and pan controls",
+      "Fit model to screen and quick reset",
+      "Solid and wireframe viewing modes",
+      "Detailed mesh statistics and triangle count",
+    ],
     whatIs:
-      "An STL file describes the surface of a 3D model as a collection of triangles. It is common in 3D printing, prototyping, machining, and exported CAD workflows.",
+      "An STL (Stereolithography) file describes the surface geometry of a 3D model as a collection of triangles. It is the industry-standard file format used across 3D printing, rapid prototyping, CNC machining, and CAD software exports.",
     howToOpen:
-      "Choose an STL file from your device. The viewer reads the mesh in your browser and places it in a simple 3D scene that you can rotate, zoom, and reframe.",
+      "Upload or drag and drop your STL file into this free online stl file viewer. The browser-based tool parses the mesh instantly into an interactive 3D scene where you can rotate, zoom, and inspect your model without installing heavy software.",
     withoutSoftware:
-      "Yes. For supported STL files, you can inspect the model in the browser without installing a slicer, CAD package, or 3D modeling app.",
+      "Yes. With this free online stl viewer, you can inspect, rotate, and review 3D models directly in any modern web browser without installing local CAD suites, dedicated slicers, or 3D modeling apps.",
     faqs: [
       {
+        question: "How do I open an STL file online for free?",
+        answer:
+          "You can open and view any .stl file instantly by dragging and dropping it into our free online stl viewer. No installation, signup, or software download is required.",
+      },
+      {
         question: "What is the difference between binary and ASCII STL?",
-        answer: "Binary STL files are more compact and faster to load, while ASCII STL files are human-readable text. Both contain the same mesh data in different formats.",
+        answer:
+          "Binary STL files are more compact and faster to load, while ASCII STL files are human-readable text. Both formats contain the same triangle-based mesh data.",
       },
       {
         question: "Can I edit the STL file in this viewer?",
-        answer: "No, this viewer is for inspection only. To edit STL files, you'll need a 3D modeling application like Blender, MeshLab, or CAD software.",
+        answer:
+          "No, this online stl file viewer is built for rapid inspection and review only. To edit STL models, you will need 3D modeling applications such as Blender, MeshLab, or CAD software.",
       },
       {
         question: "Why does my STL look faceted or low-resolution?",
-        answer: "STL files only store surface triangles, not smooth curves. The resolution depends on how the model was originally exported. Higher triangle counts produce smoother surfaces.",
+        answer:
+          "STL files store flat surface triangles rather than smooth mathematical curves. The visual resolution depends on export settings from your CAD tool; higher triangle counts yield smoother surfaces.",
       },
       {
         question: "Are STL files suitable for 3D printing?",
-        answer: "Yes, STL is the most common format for 3D printing. However, you may need to check for holes, non-manifold geometry, or scale issues before printing.",
+        answer:
+          "Yes, STL is the primary format used for 3D printing. Before printing, ensure your model is manifold, watertight, and properly scaled.",
       },
     ],
     relatedFormats: ["obj", "glb", "gltf"],
@@ -79,7 +94,12 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     description:
       "Open OBJ 3D models in a browser-based viewer with practical camera controls and clear file details.",
     accepts: [".obj"],
-    features: ["OBJ geometry loading", "Orbit, zoom, and reset controls", "Fit model to screen", "Graceful handling for missing materials"],
+    features: [
+      "OBJ geometry loading",
+      "Orbit, zoom, and reset controls",
+      "Fit model to screen",
+      "Graceful handling for missing materials",
+    ],
     whatIs:
       "An OBJ file is a text-based 3D geometry format used by modeling, scanning, animation, and asset pipelines. It can reference separate material or texture files.",
     howToOpen:
@@ -91,19 +111,23 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     faqs: [
       {
         question: "Why does my OBJ model appear without colors or textures?",
-        answer: "OBJ files often reference separate MTL material files and texture images. This viewer loads the geometry but does not currently parse external material references.",
+        answer:
+          "OBJ files often reference separate MTL material files and texture images. This viewer loads the geometry but does not currently parse external material references.",
       },
       {
         question: "What is an MTL file?",
-        answer: "An MTL (Material Template Library) file defines materials, colors, and texture references for an OBJ model. It's usually named the same as the OBJ file and located in the same directory.",
+        answer:
+          "An MTL (Material Template Library) file defines materials, colors, and texture references for an OBJ model. It's usually named the same as the OBJ file and located in the same directory.",
       },
       {
         question: "Can OBJ files contain animations?",
-        answer: "Standard OBJ files are static geometry only. For animated 3D content, consider formats like GLB/GLTF or FBX which support animation data.",
+        answer:
+          "Standard OBJ files are static geometry only. For animated 3D content, consider formats like GLB/GLTF or FBX which support animation data.",
       },
       {
         question: "Is OBJ better than STL for 3D printing?",
-        answer: "OBJ can include more complex geometry and smooth curves, while STL is simpler and more universally supported by 3D printers. For complex organic shapes, OBJ may preserve better detail.",
+        answer:
+          "OBJ can include more complex geometry and smooth curves, while STL is simpler and more universally supported by 3D printers. For complex organic shapes, OBJ may preserve better detail.",
       },
     ],
     relatedFormats: ["stl", "glb", "gltf"],
@@ -118,7 +142,12 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     description:
       "View self-contained GLB scenes online with a lightweight browser 3D previewer.",
     accepts: [".glb"],
-    features: ["GLB scene loading", "Orbit, zoom, and reset controls", "Fit scene to screen", "Basic scene rendering"],
+    features: [
+      "GLB scene loading",
+      "Orbit, zoom, and reset controls",
+      "Fit scene to screen",
+      "Basic scene rendering",
+    ],
     whatIs:
       "A GLB file is the binary form of glTF. It can bundle geometry, materials, animations, and textures into one portable 3D asset.",
     howToOpen:
@@ -128,19 +157,23 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     faqs: [
       {
         question: "What is the difference between GLB and GLTF?",
-        answer: "GLB is a binary format that bundles all assets (geometry, materials, textures) into a single file. GLTF is a JSON-based format that may reference external files. GLB is more portable and easier to share.",
+        answer:
+          "GLB is a binary format that bundles all assets (geometry, materials, textures) into a single file. GLTF is a JSON-based format that may reference external files. GLB is more portable and easier to share.",
       },
       {
         question: "Can GLB files contain animations?",
-        answer: "Yes, GLB supports skeletal animations, morph targets, and node-based animations. This viewer will display the model, though animation playback support may vary.",
+        answer:
+          "Yes, GLB supports skeletal animations, morph targets, and node-based animations. This viewer will display the model, though animation playback support may vary.",
       },
       {
         question: "Why is GLB popular for web 3D?",
-        answer: "GLB is optimized for web delivery with efficient compression, self-contained assets, and widespread browser support. It's designed to be the 'JPEG of 3D'.",
+        answer:
+          "GLB is optimized for web delivery with efficient compression, self-contained assets, and widespread browser support. It's designed to be the 'JPEG of 3D'.",
       },
       {
         question: "Can I convert GLB to other formats?",
-        answer: "Yes, tools like Blender, online converters, or command-line utilities can convert GLB to OBJ, STL, FBX, and other formats depending on your needs.",
+        answer:
+          "Yes, tools like Blender, online converters, or command-line utilities can convert GLB to OBJ, STL, FBX, and other formats depending on your needs.",
       },
     ],
     relatedFormats: ["gltf", "obj", "stl"],
@@ -155,7 +188,12 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     description:
       "Open GLTF 3D scene files online and inspect them with browser orbit controls.",
     accepts: [".gltf"],
-    features: ["GLTF scene loading", "Orbit, zoom, and reset controls", "Fit scene to screen", "Clear note for external asset limits"],
+    features: [
+      "GLTF scene loading",
+      "Orbit, zoom, and reset controls",
+      "Fit scene to screen",
+      "Clear note for external asset limits",
+    ],
     whatIs:
       "A GLTF file is a JSON-based 3D scene format often used on the web. It may reference separate binary buffers, images, or textures.",
     howToOpen:
@@ -167,19 +205,23 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     faqs: [
       {
         question: "Why does my GLTF file appear incomplete?",
-        answer: "GLTF files often reference external .bin files for geometry data and separate image files for textures. This viewer supports self-contained GLTF files with embedded data URIs.",
+        answer:
+          "GLTF files often reference external .bin files for geometry data and separate image files for textures. This viewer supports self-contained GLTF files with embedded data URIs.",
       },
       {
         question: "What is a .bin file referenced by GLTF?",
-        answer: "The .bin file contains binary geometry data (vertices, indices, normals) that the GLTF JSON file references. It's usually named the same as the GLTF file and stored alongside it.",
+        answer:
+          "The .bin file contains binary geometry data (vertices, indices, normals) that the GLTF JSON file references. It's usually named the same as the GLTF file and stored alongside it.",
       },
       {
         question: "When should I use GLTF vs GLB?",
-        answer: "Use GLTF when you need to edit the JSON structure or work with external assets separately. Use GLB for a single portable file that's easier to share and deploy.",
+        answer:
+          "Use GLTF when you need to edit the JSON structure or work with external assets separately. Use GLB for a single portable file that's easier to share and deploy.",
       },
       {
         question: "Is GLTF suitable for game development?",
-        answer: "Yes, GLTF is widely supported by game engines and 3D frameworks. It's designed as a transmission format for efficient 3D content delivery.",
+        answer:
+          "Yes, GLTF is widely supported by game engines and 3D frameworks. It's designed as a transmission format for efficient 3D content delivery.",
       },
     ],
     relatedFormats: ["glb", "obj", "stl"],
@@ -247,19 +289,25 @@ export function getExtension(filename: string) {
 
 export function getFormatByExtension(extension: string) {
   const key = extension.toLowerCase();
-  return key in FORMAT_REGISTRY ? FORMAT_REGISTRY[key as SupportedExtension] : undefined;
+  return key in FORMAT_REGISTRY
+    ? FORMAT_REGISTRY[key as SupportedExtension]
+    : undefined;
 }
 
 export function getFormatFromFile(file: File) {
   return getFormatByExtension(getExtension(file.name));
 }
 
-export function isSupportedExtension(value: string): value is SupportedExtension {
+export function isSupportedExtension(
+  value: string,
+): value is SupportedExtension {
   return value in FORMAT_REGISTRY;
 }
 
 export function getCategories(): FormatCategory[] {
-  const categories = new Set(SUPPORTED_FORMATS.map((format) => format.category));
+  const categories = new Set(
+    SUPPORTED_FORMATS.map((format) => format.category),
+  );
   return Array.from(categories);
 }
 
@@ -274,16 +322,27 @@ if (typeof window === "undefined") {
       `FORMAT_REGISTRY mismatch with siteConfig.supportedFormats.\n` +
         `Registry has: ${registryExtensions.join(", ")}\n` +
         `Config has: ${configExtensions.join(", ")}\n` +
-        `Both must have the same formats in the same order.`
+        `Both must have the same formats in the same order.`,
     );
   }
 
   // Validate category values
-  const validCategories: FormatCategory[] = ["3D", "CAD", "Image", "Document", "Spreadsheet", "Data", "Audio", "Video", "Archive", "Code"];
+  const validCategories: FormatCategory[] = [
+    "3D",
+    "CAD",
+    "Image",
+    "Document",
+    "Spreadsheet",
+    "Data",
+    "Audio",
+    "Video",
+    "Archive",
+    "Code",
+  ];
   for (const [ext, format] of Object.entries(FORMAT_REGISTRY)) {
     if (!validCategories.includes(format.category)) {
       throw new Error(
-        `Invalid category "${format.category}" for format ${ext}. Must be one of: ${validCategories.join(", ")}`
+        `Invalid category "${format.category}" for format ${ext}. Must be one of: ${validCategories.join(", ")}`,
       );
     }
   }
@@ -293,12 +352,12 @@ if (typeof window === "undefined") {
     for (const relatedExt of format.relatedFormats) {
       if (!(relatedExt in FORMAT_REGISTRY)) {
         throw new Error(
-          `Invalid related format "${relatedExt}" in ${ext}. It must be a supported format.`
+          `Invalid related format "${relatedExt}" in ${ext}. It must be a supported format.`,
         );
       }
       if (relatedExt === ext) {
         throw new Error(
-          `Format ${ext} cannot reference itself in relatedFormats.`
+          `Format ${ext} cannot reference itself in relatedFormats.`,
         );
       }
     }
@@ -307,7 +366,7 @@ if (typeof window === "undefined") {
     const uniqueRelated = new Set(format.relatedFormats);
     if (uniqueRelated.size !== format.relatedFormats.length) {
       throw new Error(
-        `Duplicate entries found in relatedFormats for ${ext}. All entries must be unique.`
+        `Duplicate entries found in relatedFormats for ${ext}. All entries must be unique.`,
       );
     }
 
@@ -325,7 +384,9 @@ if (typeof window === "undefined") {
       throw new Error(`Format ${ext} must have a non-empty howToOpen field.`);
     }
     if (!format.withoutSoftware || format.withoutSoftware.trim() === "") {
-      throw new Error(`Format ${ext} must have a non-empty withoutSoftware field.`);
+      throw new Error(
+        `Format ${ext} must have a non-empty withoutSoftware field.`,
+      );
     }
     if (!Array.isArray(format.features) || format.features.length === 0) {
       throw new Error(`Format ${ext} must have a non-empty features array.`);
@@ -344,7 +405,9 @@ if (typeof window === "undefined") {
     for (let i = 0; i < format.faqs.length; i++) {
       const faq = format.faqs[i];
       if (!faq.question || faq.question.trim() === "") {
-        throw new Error(`Format ${ext} FAQ ${i} must have a non-empty question.`);
+        throw new Error(
+          `Format ${ext} FAQ ${i} must have a non-empty question.`,
+        );
       }
       if (!faq.answer || faq.answer.trim() === "") {
         throw new Error(`Format ${ext} FAQ ${i} must have a non-empty answer.`);

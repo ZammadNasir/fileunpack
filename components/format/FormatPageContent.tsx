@@ -9,52 +9,83 @@ type FormatPageContentProps = {
 };
 
 export function FormatPageContent({ format }: FormatPageContentProps) {
+  const formatLabel = format.name;
+  const extensionLabel = format.extension.toUpperCase();
   return (
     <main>
-      <section className="hero-grid grid min-w-0 grid-cols-1 border-b border-ink/15 lg:grid-cols-2">
+      <section
+        aria-labelledby="format-page-title"
+        className="hero-grid grid min-w-0 grid-cols-1 border-b border-ink/15 lg:grid-cols-2"
+      >
         <div className="hero-copy flex min-w-0 flex-col justify-between gap-12 bg-sage px-6 py-10 md:px-10 md:py-14 lg:px-14">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-            {format.category} viewer
+            Online {formatLabel} viewer
           </p>
+
           <div>
-            <h1 className="max-w-none font-display text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.88] tracking-[-0.03em] text-ink">
-              Open {format.name} files right in your browser.
+            <h1
+              id="format-page-title"
+              className="max-w-none font-display text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.88] tracking-[-0.03em] text-ink"
+            >
+              View {formatLabel} files online.
             </h1>
+
             <p className="mt-7 max-w-lg text-[1.05rem] leading-relaxed text-ink/80">
-              {format.description} Processed locally whenever possible &mdash;
-              no account, no upload queue, no ceremony.
+              {format.description} Open supported files in your browser, inspect
+              the content, and use the available viewer controls without
+              installing a separate desktop viewer.
             </p>
+
+            <a
+              href="#open-file"
+              className="mt-7 inline-flex min-h-12 items-center justify-center bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sage-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+            >
+              Open {formatLabel} file
+            </a>
           </div>
+
           <div className="max-w-md">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-              Quick stats
+              Viewer details
             </p>
+
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink/75">
-              <li>• Files up to {siteConfig.maxFileSizeMB} MB supported</li>
-              <li>• {format.features.length} viewer features available</li>
-              <li>• Processed locally in your browser</li>
+              <li>Files up to {siteConfig.maxFileSizeMB} MB supported</li>
+              <li>{format.features.length} viewing features available</li>
+              <li>
+                Supported files processed in your browser where the
+                implementation permits
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-3">
-          <DropFileCard preferredFormat={format} />
+        {/* Viewer actions */}
+        <div
+          id="open-file"
+          className="hero-actions grid min-w-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-3"
+        >
+          <div className="min-w-0">
+            <DropFileCard preferredFormat={format} />
+          </div>
 
           <a
             href="#format-guide"
-            className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist md:px-10 lg:py-12"
+            className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
           >
             <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
               Format details
             </span>
+
             <span className="mt-3 block font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
-              {format.name} Specs &amp; Limits
+              {formatLabel} specifications
             </span>
+
             <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
-              Accepts {format.accepts.join(" and ")} up to{" "}
+              Supports {format.accepts.join(", ")} files up to{" "}
               {siteConfig.maxFileSizeMB} MB.{" "}
               {format.limitations ??
-                `No known limitations for ${format.name} files in this viewer.`}
+                `Files must be compatible with this ${formatLabel} viewer.`}
             </span>
           </a>
 
@@ -62,17 +93,20 @@ export function FormatPageContent({ format }: FormatPageContentProps) {
             <a
               href={format.sampleFile}
               download={`sample.${format.extension}`}
-              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist md:px-10 lg:py-12"
+              className="hero-action flex min-w-0 flex-col justify-center border-b border-ink/15 bg-white px-6 py-8 transition-colors hover:bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ink md:px-10 lg:py-12"
             >
               <span className="block font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">
-                Try it out
+                Example file
               </span>
+
               <span className="mt-3 flex items-center gap-2 font-display text-[clamp(1.25rem,3.5vw,2.8rem)] font-black leading-none text-sage-deep">
                 <Download aria-hidden="true" size={32} strokeWidth={1.5} />
-                Download sample {format.name} file
+                Download sample {formatLabel}
               </span>
+
               <span className="mt-4 block max-w-xs text-[0.98rem] leading-relaxed text-ink/80">
-                Get a sample {format.name} file to test the viewer.
+                Download a sample {extensionLabel} file and try it in the
+                viewer.
               </span>
             </a>
           )}
