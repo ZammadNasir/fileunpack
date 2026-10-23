@@ -92,42 +92,48 @@ export const FORMAT_REGISTRY: Record<SupportedExtension, FormatDefinition> = {
     viewer: "3d",
     supported: true,
     description:
-      "Open OBJ 3D models in a browser-based viewer with practical camera controls and clear file details.",
+      "Open and view 3D OBJ mesh files online with interactive orbit, zoom, and panning controls directly in your web browser.",
     accepts: [".obj"],
     features: [
-      "OBJ geometry loading",
-      "Orbit, zoom, and reset controls",
-      "Fit model to screen",
-      "Graceful handling for missing materials",
+      "Fast Wavefront OBJ 3D geometry parsing",
+      "Interactive orbit, zoom, pan, and view reset controls",
+      "Automatic fit-to-view camera framing",
+      "Solid and wireframe geometry display modes",
+      "Graceful fallback for standalone geometry without external MTL files",
     ],
     whatIs:
-      "An OBJ file is a text-based 3D geometry format used by modeling, scanning, animation, and asset pipelines. It can reference separate material or texture files.",
+      "A Wavefront OBJ file is an open, text-based 3D geometry format used extensively across 3D modeling, 3D scanning, computer graphics, and animation pipelines. It stores 3D vertices, texture coordinates, surface normals, and polygonal faces.",
     howToOpen:
-      "Select an OBJ file and the viewer will parse the local geometry directly in your browser. You can then rotate, zoom, and fit the model to the canvas.",
+      "Select or drag and drop your .obj file into this free online obj viewer. The web-based tool parses and renders the 3D model geometry directly in your browser, allowing you to rotate, inspect, and reframe the model without downloading local software.",
     withoutSoftware:
-      "Yes, basic OBJ geometry can be opened here without a modeling application. External MTL files and texture folders are not loaded in this MVP.",
+      "Yes. You can open and inspect Wavefront OBJ files instantly in any modern web browser without installing CAD suites, Blender, or dedicated 3D viewing applications.",
     limitations:
-      "This first version loads the OBJ geometry you select. If the file depends on separate MTL or texture assets, those materials may not appear.",
+      "This browser viewer focuses on parsing OBJ 3D mesh geometry. If your model relies on separate MTL (Material Template Library) files or external texture image folders, surface geometry will load cleanly, but advanced materials and textures may not render.",
     faqs: [
+      {
+        question: "How do I open an OBJ file online for free?",
+        answer:
+          "You can open any .obj file online for free by uploading or dragging and dropping your model directly into our online OBJ viewer. No software installation, browser plugin, or account signup is needed.",
+      },
       {
         question: "Why does my OBJ model appear without colors or textures?",
         answer:
-          "OBJ files often reference separate MTL material files and texture images. This viewer loads the geometry but does not currently parse external material references.",
+          "OBJ files store 3D mesh geometry, while colors, materials, and textures are referenced in external MTL (Material Template Library) files and image assets. This viewer renders standalone mesh geometry gracefully, but does not parse external material files.",
       },
       {
-        question: "What is an MTL file?",
+        question: "What is an MTL file and how does it relate to an OBJ file?",
         answer:
-          "An MTL (Material Template Library) file defines materials, colors, and texture references for an OBJ model. It's usually named the same as the OBJ file and located in the same directory.",
+          "An MTL (Material Template Library) file is a companion ASCII file that defines surface colors, specularity, and texture map paths for an OBJ 3D model. It usually shares the same file name and resides in the same directory as the .obj file.",
       },
       {
-        question: "Can OBJ files contain animations?",
+        question: "Can OBJ files contain 3D animations?",
         answer:
-          "Standard OBJ files are static geometry only. For animated 3D content, consider formats like GLB/GLTF or FBX which support animation data.",
+          "No, standard Wavefront OBJ files only store static 3D geometry and mesh surface data. For animated 3D models or rigged character assets, consider modern web formats like GLB/gTF or FBX.",
       },
       {
-        question: "Is OBJ better than STL for 3D printing?",
+        question: "Is OBJ better than STL for 3D printing and modeling?",
         answer:
-          "OBJ can include more complex geometry and smooth curves, while STL is simpler and more universally supported by 3D printers. For complex organic shapes, OBJ may preserve better detail.",
+          "OBJ files support complex surface geometry, texture coordinates, and quad meshes, whereas STL files only store simple triangular meshes. While STL remains the standard for basic 3D printing, OBJ is preferred when complex geometric details or color mapping are required.",
       },
     ],
     relatedFormats: ["stl", "glb", "gltf"],
